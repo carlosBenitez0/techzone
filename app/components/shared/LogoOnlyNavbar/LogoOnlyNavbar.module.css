@@ -1,0 +1,8 @@
+.logoOnlyNavbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+}

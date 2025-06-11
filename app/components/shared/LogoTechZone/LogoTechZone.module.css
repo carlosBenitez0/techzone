@@ -1,0 +1,91 @@
+/* Contenedor principal */
+.navContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Logo con efectos */
+.logoContainer {
+  position: relative;
+  background-image: var(--tech-gradient);
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  margin-right: 0.75rem;
+  overflow: hidden;
+}
+
+.logoContainer:hover {
+  animation: var(--animate-border-glow);
+}
+
+/* Efecto hover blanco */
+.logoHoverEffect {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.navContainer:hover .logoHoverEffect {
+  transform: scaleX(1);
+}
+
+/* Icono */
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  position: relative;
+  z-index: 10;
+}
+
+/* Efecto sparkle */
+.sparkle {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.navContainer:hover .sparkle {
+  opacity: 1;
+  animation: sparkle 1.5s infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Textos */
+.title {
+  font-size: 1.6rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  background: var(--tech-gradient);
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  font-family: "Inter", sans-serif;
+}

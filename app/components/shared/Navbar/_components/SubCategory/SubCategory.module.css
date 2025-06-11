@@ -1,0 +1,27 @@
+.subCategory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.subCategory:hover {
+  background-color: rgb(237, 237, 237);
+}
+
+.name {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.image {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
