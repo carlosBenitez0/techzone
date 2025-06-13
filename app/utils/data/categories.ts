@@ -12,13 +12,13 @@ export const categories = [
       {
         name: "PCs de Escritorio",
         image:
-          "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=300",
+          "https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-4.0.3&w=300",
         types: ["Todo-en-uno", "Torres", "Workstations", "Mini PC"],
       },
       {
         name: "Componentes",
         image:
-          "https://images.unsplash.com/photo-1587202372775-e229f172b9d3?w=300",
+          "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749824565/robin-glauser-zP7X_B86xOg-unsplash_nzwofu.jpg",
         types: [
           "Procesadores",
           "Tarjetas Gráficas",
@@ -60,7 +60,7 @@ export const categories = [
       {
         name: "Smartphones Gaming",
         image:
-          "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=300",
+          "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749824569/amanz-iZ93A3Zf1Ho-unsplash_pdiby7.jpg",
         brands: ["ASUS ROG Phone", "Red Magic", "Black Shark"],
       },
       {
@@ -84,7 +84,7 @@ export const categories = [
       {
         name: "PC Gaming",
         image:
-          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=300",
+          "https://images.unsplash.com/photo-1563212032-a5a5c8a814b8?ixlib=rb-4.0.3&w=300",
         types: ["Pre-built", "Componentes", "Accesorios"],
       },
       {
@@ -96,7 +96,7 @@ export const categories = [
       {
         name: "Sillas Gaming",
         image:
-          "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300",
+          "https://images.unsplash.com/photo-1595341595379-cf0f0a3a75f1?ixlib=rb-4.0.3&w=300",
         brands: ["Razer", "Secretlab", "DXRacer"],
       },
     ],
@@ -126,14 +126,14 @@ export const categories = [
       {
         name: "Electrodomésticos Inteligentes",
         image:
-          "https://images.unsplash.com/photo-1579114701599-e8c8a6e6a8e7?w=300",
+          "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&w=300",
         types: ["Termostatos", "Aspiradoras", "Purificadores"],
       },
     ],
   },
   {
     name: "Audio",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
+    image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500",
     subcategories: [
       {
         name: "Audífonos",
@@ -156,7 +156,7 @@ export const categories = [
       {
         name: "Accesorios Audio",
         image:
-          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300",
+          "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&w=300",
         types: ["Amplificadores", "DACs", "Cables"],
       },
     ],
@@ -180,13 +180,13 @@ export const categories = [
       {
         name: "NAS",
         image:
-          "https://images.unsplash.com/photo-1597764690528-5e0d8a8f9f9b?w=300",
+          "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&w=300",
         brands: ["Synology", "QNAP", "WD"],
       },
       {
         name: "Cableado",
         image:
-          "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=300",
+          "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&w=300",
         types: ["Ethernet", "Fibra Óptica", "Conectores"],
       },
     ],
@@ -210,7 +210,7 @@ export const categories = [
       {
         name: "Suministros",
         image:
-          "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=300",
+          "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&w=300",
         types: ["Tóner", "Tinta", "Papel Especial"],
       },
       {
@@ -241,7 +241,7 @@ export const categories = [
       {
         name: "Accesorios",
         image:
-          "https://images.pexels.com/photos/5626859/pexels-photo-5626859.jpeg?w=300",
+          "https://images.unsplash.com/photo-1518633945839-7b4a8a7e4b3e?w=300",
         types: ["Baterías", "Controladores", "Cámaras"],
       },
       {

@@ -4,7 +4,6 @@ import {
   GlobalSearch,
   LogoTechZone,
 } from "@/app/components/shared/";
-import { Logo } from "../Logo/Logo";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -36,7 +35,7 @@ export const Navbar = () => {
     return (
       <div className={styles.navbar}>
         <div className={styles.navbarContent}>
-          <Logo w={90} h={50} clickable={true} />
+          <LogoTechZone />
         </div>
       </div>
     );
