@@ -29,6 +29,17 @@ export const ExploreDropdown = () => {
     }
   }, [exploreDropdownVisible]);
 
+  useEffect(() => {
+    if (exploreDropdownVisible === true) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [exploreDropdownVisible]);
+
   return (
     <div className={styles.exploreDropdown} ref={exploreDropdownRef}>
       <div

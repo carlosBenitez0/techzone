@@ -1,0 +1,273 @@
+.card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: white;
+  transition: all 0.7s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  scale: 1;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.backgroundElements {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover .backgroundElements {
+  opacity: 0.3;
+}
+
+.floatingOrb {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  animation: bubbleFloat 6s ease-in-out infinite;
+}
+
+.glowBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover .glowBorder {
+  opacity: 1;
+}
+
+.borderPulse {
+  position: absolute;
+  border-radius: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.cornerBorder {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.6);
+  animation: pulse 2s infinite;
+}
+
+.shimmerEffect {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 2s linear infinite;
+  transform: skewX(-12deg);
+}
+
+.card:hover .shimmerEffect {
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+}
+
+.iconContainerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.iconContainer {
+  position: relative;
+}
+
+.icon {
+  width: 5rem;
+  height: 5rem;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.card:hover .icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+.iconGlow {
+  position: absolute;
+  inset: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  filter: blur(1.5rem);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover .iconGlow {
+  opacity: 1;
+}
+
+.count {
+  font-size: 3rem;
+  font-weight: 700;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .count {
+  opacity: 1;
+}
+
+.countLine {
+  width: 2rem;
+  height: 0.125rem;
+  background: rgba(255, 255, 255, 0.4);
+  margin-left: auto;
+  margin-top: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover .countLine {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.title {
+  font-size: 1.6rem;
+  font-family: var(--font-orbitron);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transition: color 0.3s ease;
+}
+
+.description {
+  font-size: 1.4rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .description {
+  opacity: 1;
+}
+
+.progressBar {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  height: 0.125rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transition: transform 0.7s ease;
+  transform-origin: left;
+}
+
+.card:hover .progressFill {
+  transform: scaleX(1);
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 9999px;
+  background: white;
+  opacity: 0;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.card:hover .sparkle {
+  opacity: 1;
+}
+
+.floatingOrbLarge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10rem;
+  height: 10rem;
+  background: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  border-radius: 9999px;
+  transform: translate(5rem, 5rem);
+  transition: all 1s ease;
+}
+
+.card:hover .floatingOrbLarge {
+  transform: translate(4rem, 4rem);
+  scale: 1.5;
+}
+
+/* ===== Animaciones ===== */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bubbleFloat {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translateY(-20px) translateX(10px) scale(1.1);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translateY(-10px) translateX(-10px) scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

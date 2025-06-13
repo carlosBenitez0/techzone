@@ -102,36 +102,6 @@ export const categories = [
     ],
   },
   {
-    name: "Smart Home",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500",
-    subcategories: [
-      {
-        name: "Asistentes Virtuales",
-        image:
-          "https://images.unsplash.com/photo-1579114701599-e8c8a6e6a8e7?w=300",
-        types: ["Amazon Echo", "Google Nest", "Apple HomePod"],
-      },
-      {
-        name: "Iluminación Inteligente",
-        image:
-          "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=300",
-        brands: ["Philips Hue", "LIFX", "Yeelight"],
-      },
-      {
-        name: "Seguridad",
-        image:
-          "https://images.unsplash.com/photo-1558002038-1055907df827?w=300",
-        types: ["Cámaras", "Cerraduras", "Sensores"],
-      },
-      {
-        name: "Electrodomésticos Inteligentes",
-        image:
-          "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&w=300",
-        types: ["Termostatos", "Aspiradoras", "Purificadores"],
-      },
-    ],
-  },
-  {
     name: "Audio",
     image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500",
     subcategories: [
@@ -222,61 +192,6 @@ export const categories = [
     ],
   },
   {
-    name: "Drones",
-    image:
-      "https://images.pexels.com/photos/5626859/pexels-photo-5626859.jpeg?w=500",
-    subcategories: [
-      {
-        name: "Profesionales",
-        image:
-          "https://images.pexels.com/photos/5626859/pexels-photo-5626859.jpeg?w=300",
-        brands: ["DJI", "Autel", "Parrot"],
-      },
-      {
-        name: "Recreativos",
-        image:
-          "https://images.unsplash.com/photo-1518633945839-7b4a8a7e4b3e?w=300",
-        types: ["Principiantes", "Careras", "Mini Drones"],
-      },
-      {
-        name: "Accesorios",
-        image:
-          "https://images.unsplash.com/photo-1518633945839-7b4a8a7e4b3e?w=300",
-        types: ["Baterías", "Controladores", "Cámaras"],
-      },
-      {
-        name: "FPV",
-        image:
-          "https://images.unsplash.com/photo-1518633945839-7b4a8a7e4b3e?w=300",
-        types: ["Kits Completos", "Componentes", "Goggles"],
-      },
-    ],
-  },
-  {
-    name: "Realidad Virtual",
-    image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=500",
-    subcategories: [
-      {
-        name: "Headsets",
-        image:
-          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=300",
-        brands: ["Oculus", "HTC Vive", "Valve Index"],
-      },
-      {
-        name: "Accesorios VR",
-        image:
-          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=300",
-        types: ["Controladores", "Sensores", "Cascos"],
-      },
-      {
-        name: "AR",
-        image:
-          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=300",
-        types: ["Gafas AR", "Desarrollo", "Empresarial"],
-      },
-    ],
-  },
-  {
     name: "Oficina",
     image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500",
     subcategories: [
@@ -297,36 +212,6 @@ export const categories = [
         image:
           "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=300",
         types: ["Discos Duros", "USB", "NAS Empresarial"],
-      },
-    ],
-  },
-  {
-    name: "Software",
-    image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=500",
-    subcategories: [
-      {
-        name: "Sistemas Operativos",
-        image:
-          "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300",
-        types: ["Windows", "macOS", "Linux"],
-      },
-      {
-        name: "Productividad",
-        image:
-          "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300",
-        types: ["Office", "Adobe", "AutoCAD"],
-      },
-      {
-        name: "Seguridad",
-        image:
-          "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300",
-        types: ["Antivirus", "VPN", "Backup"],
-      },
-      {
-        name: "Creativo",
-        image:
-          "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300",
-        types: ["Edición Video", "Foto", "3D"],
       },
     ],
   },

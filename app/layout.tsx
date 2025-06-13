@@ -6,10 +6,11 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-//techzone es una tienda de tecnologia
+
 export const metadata: Metadata = {
   title: "TechZone",
-  description: "Your online tech store for all your tech needs",
+  description:
+    "Descubre en TechZone los mejores productos tecnológicos: computadoras, smartphones, gaming, smart home y más. Envíos rápidos y precios competitivos. Tu tienda de tecnología de confianza con las últimas novedades y ofertas exclusivas.",
 };
 
 export default function RootLayout({
@@ -19,7 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable}`}>{children}</body>
+      <body
+        className={`${geistSans.variable}`}
+        style={{ position: "relative" }}
+      >
+        {children}
+      </body>
     </html>
   );
 }

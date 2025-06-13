@@ -30,10 +30,16 @@
 
 .exploreDropdownContainer {
   position: absolute;
-  top: 9rem;
+  top: 8.4rem;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   overflow: hidden;
   height: calc(100vh - 9rem);
+}
+
+.noScroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }

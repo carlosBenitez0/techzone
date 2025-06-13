@@ -1,0 +1,47 @@
+/* StarRating.module.css */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.star {
+  transition: fill 0.2s ease, transform 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.1);
+}
+
+.starFilled {
+  fill: var(--accent-500);
+  color: var(--accent-500);
+}
+
+.starEmpty {
+  fill: var(--gray-400);
+  color: var(--gray-400);
+}
+
+.ratingText {
+  font-size: 1.4rem;
+  color: var(--gray-600);
+  margin-left: 0.4rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Tamaños */
+.sm {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.md {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.lg {
+  width: 2rem;
+  height: 2rem;
+}
