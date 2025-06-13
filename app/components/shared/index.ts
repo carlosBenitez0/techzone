@@ -7,3 +7,4 @@ export * from "./Navbar/_components/GlobalSearch/GlobalSearch";
 export * from "./Navbar/_components/ExploreDropdown/ExploreDropdown";
 export * from "./Navbar/_components/ExploreDropdownContent/ExploreDropdownContent";
 export * from "./Navbar/_components/CategoryHeaderItem/CategoryHeaderItem";
+export * from "./LogoTechZoneNoText/LogoTechZoneNoText";

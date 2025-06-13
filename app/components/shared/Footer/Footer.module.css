@@ -1,0 +1,156 @@
+.footerBg {
+  background-image: url("https://res.cloudinary.com/dc69f3e0o/image/upload/v1732674286/footer-proyect/eruefk5llm0byr7l1wip.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  padding: 6rem 0;
+}
+
+.footerBg > div {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.footerBg > div h1 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.footerBg > div div {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 1rem;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logoContainer {
+  position: relative;
+  width: 12rem;
+  height: 3rem;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+/*Footer bottom*/
+
+.bottomFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-image: var(--dark-gradient);
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 768px) {
+  .bottomFooter {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.socialMedia {
+  display: flex;
+  gap: 1rem;
+  font-size: 2.2rem;
+  padding: 0.7rem 0;
+}
+
+.mediaIcon {
+  cursor: pointer;
+  color: #fff;
+}
+
+.containerLinks {
+  display: flex;
+  padding-top: 0.7rem;
+}
+
+.footerLinks {
+  padding-right: 7rem;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footerLinks {
+    padding-right: 4rem !important;
+  }
+}
+
+.footerLinks > div {
+  margin-bottom: 3rem;
+}
+
+.footerLinks h3 {
+  font-weight: bold;
+}
+
+.footerLinks div nav ul {
+  list-style: none;
+}
+
+.footerNavUl {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footerLink {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  color: rgb(222, 222, 222);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: #fff;
+}
+
+.footerLinks div:last-child {
+  color: #fff;
+}
+
+.copyright {
+  background-image: var(--dark-gradient);
+  padding: 2rem 0 2rem 2rem;
+  border-top: 2px solid var(--border-orange);
+  color: rgb(239, 239, 239);
+  font-size: 1.4rem;
+}
+
+/* responsive tablet */
+
+@media screen and (max-width: 768px) {
+  .footerBg h1 {
+    font-size: 3rem;
+  }
+
+  .footerBg div {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footerLinks {
+    padding-right: 6rem;
+  }
+
+  .bottomFooter {
+    font-size: 1.3rem;
+  }
+
+  .copyright {
+    font-size: 1.2rem;
+  }
+}

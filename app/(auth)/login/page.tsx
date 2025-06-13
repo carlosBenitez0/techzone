@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { BsCpu } from "react-icons/bs";
 import Link from "next/link";
+import { LogoTechZoneNoText } from "@/app/components/shared";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,9 +49,7 @@ export const Login = () => {
         {/* Header */}
         <div className={styles.loginHeader}>
           <div className={styles.logoContainer}>
-            <div className={styles.logoIcon}>
-              <BsCpu className={styles.logoImage} />
-            </div>
+            <LogoTechZoneNoText w={50} h={50} clickable={false} />
           </div>
           <h1 className={`${styles.loginTitle} ${styles.fontOrbitron}`}>
             Bienvenido
