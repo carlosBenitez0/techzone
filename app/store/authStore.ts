@@ -91,8 +91,6 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
             
             set((state) => ({
                 registeredUsers: [...state.registeredUsers, newUser],
-                userData: newUser,
-                isAuthenticated: true,
                 isLoading: false,
                 error: null
             }));

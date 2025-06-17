@@ -13,12 +13,13 @@ import {
 
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
-import { useAuth } from "@/app/hooks";
+import { useAuthStore } from "@/app/store/authStore";
+import { useRouter } from "next/navigation";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const { isLoading, setIsLoading, error, setError, register } = useAuth();
+  const router = useRouter();
+  const { isLoading, register, error } = useAuthStore();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -28,44 +29,15 @@ export const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    // validaciones
-    if (formData.name.length < 3) {
-      setError("El nombre debe tener al menos 3 caracteres.");
-      setIsLoading(false);
-      return;
+    try{
+      const result = await register(formData);
+      if(result){
+        router.push("/login");
+      }
+    }catch(err){
+      console.log(err);
     }
-
-    if (formData.password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.name || !formData.email || !formData.password) {
-      setError("Todos los campos son obligatorios.");
-      setIsLoading(false);
-      return;
-    }
-
-    if (
-      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-    ) {
-      setError("El correo electrónico no es válido.");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      setTimeout(() => {
-        register({ ...formData, id: 0 });
-      }, 3000);
-    } catch (err) {
-      setError(`Error en el servidor. Intenta nuevamente.`);
-    } finally {
-      setIsLoading(false);
-    }
+    
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
