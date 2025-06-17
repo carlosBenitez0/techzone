@@ -1,0 +1,421 @@
+.sidebar {
+    position: relative;
+    background: linear-gradient(to bottom, var(--gray-900), var(--gray-800), var(--gray-900));
+    color: white;
+    min-height: 100vh;
+    border-right: 1px solid rgba(55, 65, 81, 0.5);
+    transition: width 0.3s ease;
+  }
+
+  
+  .sidebarCollapsed {
+    width: 8rem;
+  }
+  
+  .sidebarExpanded {
+    width: 25.5rem;
+  }
+ 
+
+  .backgroundEffects{
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  /* Background Effects */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.05;
+    animation: var(--animate-bubble-float) 6s ease-in-out infinite;
+  }
+  
+  .bubblePrimary {
+    background-color: var(--primary-500);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: -translateX(1.75rem) -translateY(1.75rem);
+  }
+  
+  .bubbleAccent {
+    background-color: var(--accent-500);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translateX(0.75rem) translateY(0.75rem);
+    animation-delay: 2s;
+  }
+  
+  /* Header */
+  .sidebarHeader {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+  }
+
+  .sidebarHeaderContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .brandContainer {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .brandText {
+    margin-left: 0.75rem;
+  }
+  
+  .brandTitle {
+    font-family: var(--font-orbitron);
+    font-weight: bold;
+    font-size: 1.6rem;
+    background: var(--tech-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .brandSubtitle {
+    font-size: 1rem;
+    color: var(--gray-400);
+  }
+  
+  .toggleButton {
+    outline: none;
+    border: none; 
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: var(--gray-300);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .toggleButton:hover {
+    background-color: var(--gray-800);
+  }
+  
+  .toggleIcon {
+    width: 0.5rem;
+    height: 0.5rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .toggleButton:hover .toggleIcon {
+    color: var(--accent-400);
+  }
+
+  .toggleCollapseIcon {
+    background-image: linear-gradient(to right, transparent, var(--gray-900));
+  }
+  
+  /* User Info */
+  .userInfo {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+  }
+  
+  .userAvatar {
+    width: 4rem;
+    height: 4rem;
+    background: var(--tech-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .userInitial {
+    color: white;
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+  
+  .userDetails {
+    margin-left: 0.75rem;
+  }
+  
+  .userName {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: white;
+  }
+  
+  .userRole {
+    font-size: 1.2rem;
+    color: var(--gray-400);
+  }
+  
+  /* Navigation */
+  .navMenu {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    flex: 1;
+  }
+  
+  .navList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    list-style: none;
+  }
+  
+  .navItem {
+    width: 100%;
+  }
+  
+  .navButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    &.navItemCollapsed {
+      padding: 1rem;
+    }
+  }
+
+  .navButtonActive {
+    background: var(--tech-gradient);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(13, 110, 253, 0.25);
+  }
+  
+  .navButtonInactive {
+    color: var(--gray-400);
+  }
+  
+  .navButtonInactive:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .shimmerEffect {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transform: skewX(-12deg);
+    animation: shimmer 3s linear infinite;
+  }
+
+  
+  .navIcon {
+    width: 1.8rem;
+    height: 1.8rem;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
+  
+  .navButtonActive .navIcon {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .navButtonInactive:hover .navIcon {
+    transform: scale(1.1);
+  }
+  
+  .navText {
+    margin-left: 0.75rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .activeIndicator {
+    position: absolute;
+    right: 0.3rem;
+    margin-right: .5rem;
+    width: .5rem;
+    height: .5rem;
+    background-color: white;
+    border-radius: 50%;
+    animation: pulse 3s infinite;
+  }
+  
+  /* Logout Button */
+  .logoutContainer {
+    position: relative;
+    z-index: 10;
+    padding: 1rem 2rem;
+    border-top: 1px solid rgba(55, 65, 81, 0.5);
+  }
+  
+  .logoutButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 2.2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border:  none;
+    outline: none;
+    cursor: pointer;
+    color: var(--gray-300);
+  }
+  
+  .logoutButton:hover {
+    color: rgb(255, 133, 133);
+    background-color: rgba(239, 68, 68, 0.187);
+    
+  }
+  
+  .logoutIcon {
+    width: 1.6rem;
+    height: 1.6rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .logoutButton:hover .logoutIcon {
+    transform: scale(1.1);
+  }
+  
+  /* Decorative Elements */
+  .sparkle {
+    position: absolute;
+    border-radius: 50%;
+    
+    animation: sparkle 1.5s ease-in-out infinite;
+  }
+  
+  .sparkleAccent {
+    background-color: var(--accent-500);
+    opacity: 0.6;
+    bottom: 4;
+    left: 4;
+    width: 2;
+    height: 2;
+  }
+  
+  .sparklePrimary {
+    background-color: var(--primary-400);
+    opacity: 0.4;
+    top: 1/3;
+    right: 4;
+    width: 1;
+    height: 1;
+  }
+
+  @keyframes shimmer {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(50%);
+    }
+  }
+
+  
+  @keyframes pulse {
+    0%,
+    100% {
+      scale: 1;
+      opacity: 1;
+    }
+    50% {
+      scale: 1.5;
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .sidebarCollapsed {
+      width: 8rem;   
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebarExpanded {
+      width: 8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    /* display none todo menos los iconos, todos los textos display none */
+    
+    .userInfo p{
+      display: none;
+    }
+    .navButton{
+      padding: 1rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center !important;
+      text-align: center;
+    }
+    .navButton .navText{
+      display: none;
+      
+    }
+    
+    .logoutButton, .navButton {
+      width: fit-content;
+    }
+   
+    .logoutIcon + span {
+      display: none;
+    }
+    .toggleButton{
+      display: none;
+    }
+    .toggleIcon{
+      display: none;
+    }
+    
+    .brandText{
+      display: none;
+    }
+    .brandTitle{
+      display: none;
+    }
+    .brandSubtitle{
+      display: none;
+    }
+    .brandContainer{
+      display: flex;
+    }
+    .brandText{
+      display: none;
+    }
+    .brandTitle{
+      display: none;
+    }
+    .brandSubtitle{
+      display: none;
+    }
+    .activeIndicator{
+      display: none;
+    }
+  }

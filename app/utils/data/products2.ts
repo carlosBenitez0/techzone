@@ -9,7 +9,8 @@ export const productsData = [
     originalPrice: 1699.99,
     rating: 4.7,
     reviews: 92,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749877591/717Lo8oZaAL._AC_UF894_1000_QL80__v8f2n2.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 18,
     freeShipping: true,
     featured: true,
@@ -30,7 +31,8 @@ export const productsData = [
     price: 1799.99,
     rating: 4.8,
     reviews: 134,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878041/G14-White-53_06_yxozt2.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 9,
     freeShipping: true,
     featured: false,
@@ -53,7 +55,8 @@ export const productsData = [
     price: 2199.99,
     rating: 4.6,
     reviews: 47,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878056/00xTIwo4AQMjnWl4H4ctDCq-1..v1643394203_ioua4z.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 5,
     freeShipping: true,
     featured: true,
@@ -75,7 +78,8 @@ export const productsData = [
     originalPrice: 3299.99,
     rating: 4.9,
     reviews: 68,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878055/450_1000_x24svl.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 7,
     freeShipping: true,
     featured: true,
@@ -98,7 +102,8 @@ export const productsData = [
     price: 699.99,
     rating: 4.9,
     reviews: 215,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878054/csm_luke_chesser_tgrBcf7S_dY_unsplash_49af4fd126_p0xppn.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 14,
     freeShipping: true,
     featured: true,
@@ -118,7 +123,8 @@ export const productsData = [
     price: 249.99,
     rating: 4.7,
     reviews: 182,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878052/ram-32gb-2-x-16gb-ddr4-4000mhz-corsair-dominator-platinum-rgb840006639886_pphnbi.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 23,
     freeShipping: true,
     featured: false,
@@ -141,7 +147,8 @@ export const productsData = [
     price: 799.99,
     rating: 4.7,
     reviews: 96,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878051/MNT-32BN88U-B-02-UHD-4K-IPS-M_zmrx7v.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 11,
     freeShipping: true,
     featured: false,
@@ -161,7 +168,8 @@ export const productsData = [
     price: 2999.99,
     rating: 4.8,
     reviews: 42,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878050/w260_ru39ev.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 3,
     freeShipping: true,
     featured: true,
@@ -184,7 +192,8 @@ export const productsData = [
     price: 169.99,
     rating: 4.9,
     reviews: 147,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878048/Keychron-Q3-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-80-percent-layout-aluminum-black-for-Mac-WIndows-Linux-RGB-backlight-hot-swappable-K-Pro-switch-red-ISO-Nordic-layout_iraz7k.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 28,
     freeShipping: true,
     featured: false,
@@ -205,7 +214,8 @@ export const productsData = [
     price: 99.99,
     rating: 4.8,
     reviews: 203,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878048/design-large_cpw473.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 37,
     freeShipping: true,
     featured: true,
@@ -229,7 +239,8 @@ export const productsData = [
     price: 1199.99,
     rating: 4.9,
     reviews: 312,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878046/6690915-800-800_i27ash.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 8,
     freeShipping: true,
     featured: true,
@@ -251,7 +262,8 @@ export const productsData = [
     originalPrice: 1399.99,
     rating: 4.8,
     reviews: 278,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878045/2311854_znxnm7.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 12,
     freeShipping: true,
     featured: true,
@@ -273,7 +285,8 @@ export const productsData = [
     price: 399.99,
     rating: 4.6,
     reviews: 154,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878044/Xiaomi-Redmi-Note-12-Pro-Plus-5G-256GB-8GB-Factory-Unlocked-6-67-200MP-Triple-Camera-for-Tmobile-Metro-Mint-Tello-US-Market-Global-Polar-White_4b927f31-4c8e-4548-ab10-ed91ee1814a3.863cb437a616312d871a7bfaec580e77_ocyutl.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 25,
     freeShipping: false,
     featured: false,
@@ -293,7 +306,8 @@ export const productsData = [
     price: 499.99,
     rating: 4.7,
     reviews: 187,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878043/Pixel_7A_Colors_1.width-500.format-webp_vn5zi4.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 19,
     freeShipping: true,
     featured: true,
@@ -315,7 +329,8 @@ export const productsData = [
     price: 1399.99,
     rating: 4.9,
     reviews: 76,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878041/w250_xes0yj.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 6,
     freeShipping: true,
     featured: true,
@@ -336,7 +351,8 @@ export const productsData = [
     price: 799.99,
     rating: 4.7,
     reviews: 92,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878200/658ece949a3e9505e85aaa46-nubia-redmagic-8-pro-global-version-5g_tdqvbn.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 14,
     freeShipping: true,
     featured: false,
@@ -358,7 +374,8 @@ export const productsData = [
     price: 129.99,
     rating: 4.8,
     reviews: 143,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878205/A1289011_TD02_V1_yl408d.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 32,
     freeShipping: true,
     featured: false,
@@ -379,7 +396,8 @@ export const productsData = [
     price: 39.99,
     rating: 4.6,
     reviews: 218,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878204/ESR-HaloLock-MagSafe-Ring_blo13n.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 47,
     freeShipping: false,
     featured: false,
@@ -403,7 +421,8 @@ export const productsData = [
     price: 399.99,
     rating: 4.9,
     reviews: 342,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878201/bcB3Kdypuv8MAA5GZZM3b_ja6via.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 5,
     freeShipping: true,
     featured: true,
@@ -423,7 +442,8 @@ export const productsData = [
     price: 499.99,
     rating: 4.8,
     reviews: 287,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878963/asi-sera-el-aspecto-de-la-consola-xbox-series-H5NHY3CJ4RDZ7LUMGWNM2NV7XM_sdpfcf.avif",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 7,
     freeShipping: true,
     featured: true,
@@ -446,7 +466,8 @@ export const productsData = [
     price: 1299.99,
     rating: 4.7,
     reviews: 84,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878961/c0_nxvtwe.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 9,
     freeShipping: true,
     featured: false,
@@ -468,7 +489,8 @@ export const productsData = [
     price: 229.99,
     rating: 4.8,
     reviews: 127,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878959/81Wsrt05uLL._AC_SL1500__mjkh7d.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 14,
     freeShipping: true,
     featured: true,
@@ -489,7 +511,8 @@ export const productsData = [
     price: 349.99,
     rating: 4.9,
     reviews: 96,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878956/design-medium_c6p3qc.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 6,
     freeShipping: true,
     featured: true,
@@ -512,7 +535,8 @@ export const productsData = [
     price: 549.99,
     rating: 4.8,
     reviews: 215,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878954/23_TITAN-Evo-Lite_Blog_Main-1_kephpw.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 4,
     freeShipping: true,
     featured: true,
@@ -536,7 +560,8 @@ export const productsData = [
     price: 429.99,
     rating: 4.8,
     reviews: 178,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878952/Bose-QuietComfort-Ultra-Wireless-Noise-Cancelling-Bluetooth-Headphones-Black_9af59772-fafc-4d0d-9c35-4c46bfcc2808.4c3e254a695cfbe27591141057fac602_shhu0h.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 12,
     freeShipping: true,
     featured: true,
@@ -557,7 +582,8 @@ export const productsData = [
     price: 299.99,
     rating: 4.9,
     reviews: 243,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878949/maxresdefault_roszcx.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 18,
     freeShipping: true,
     featured: true,
@@ -580,7 +606,8 @@ export const productsData = [
     price: 449.99,
     rating: 4.7,
     reviews: 87,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878948/e44ff3c9c02a6fcaefae13fdbde00322371145c7-2000x2000_ro1x6q.avif",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 9,
     freeShipping: true,
     featured: false,
@@ -603,7 +630,8 @@ export const productsData = [
     price: 399.99,
     rating: 4.9,
     reviews: 412,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878979/fe48125157f3ebad71f5a9f57a1aeceb_vxxniv.avif",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 7,
     freeShipping: true,
     featured: true,
@@ -627,7 +655,8 @@ export const productsData = [
     price: 449.99,
     rating: 4.7,
     reviews: 124,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878976/h525_bczsqw.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 8,
     freeShipping: true,
     featured: true,
@@ -649,7 +678,8 @@ export const productsData = [
     price: 79.99,
     rating: 4.6,
     reviews: 187,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878974/SWITCH-TP-LINK-TL-SG108PE--GIGABIT-8PTOS--EASY-SMART-4-PORTS-POE_-1_tfdan1.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 23,
     freeShipping: true,
     featured: false,
@@ -672,7 +702,8 @@ export const productsData = [
     price: 399.99,
     rating: 4.7,
     reviews: 156,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878972/a17836-productpicture-hires-es-es-et-4850-1_header_2000x2000_png_sszdjy.png",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 11,
     freeShipping: true,
     featured: true,
@@ -695,7 +726,8 @@ export const productsData = [
     price: 199.99,
     rating: 4.8,
     reviews: 213,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878970/image-acebefcdaa53463884e53b3404e077c8_lnpxty.webp",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 14,
     freeShipping: true,
     featured: false,
@@ -719,7 +751,8 @@ export const productsData = [
     price: 1299.99,
     rating: 4.6,
     reviews: 67,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878968/computadora-todo-en-uno-lenovo-thinkcentre-m90a-intel-core-i5-12500-vpro_zbgxu6.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 6,
     freeShipping: true,
     featured: true,
@@ -741,7 +774,8 @@ export const productsData = [
     price: 999.99,
     rating: 4.7,
     reviews: 53,
-    image: "https://res.cloudinary.com/dvwvxrfr1/image/upload/v1749878966/Diapositiva2-289_piqplh.jpg",
+    image:
+      "https://res.cloudinary.com/dc69f3e0o/image/upload/v1749846397/desktop-connected-to-monitor_y4uevg.avif",
     stock: 4,
     freeShipping: true,
     featured: false,
@@ -756,3 +790,17 @@ export const productsData = [
   },
 ];
 
+// Función para obtener productos destacados
+export const getFeaturedProducts = () => {
+  return productsData.filter((product) => product.featured);
+};
+
+// Función para obtener productos por categoría
+export const getProductsByCategory = (category: string) => {
+  return productsData.filter((product) => product.category === category);
+};
+
+// Función para obtener un producto por ID
+export const getProductById = (id: string) => {
+  return productsData.find((product) => product.id === id);
+};

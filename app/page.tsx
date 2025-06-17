@@ -1,5 +1,9 @@
 import { HomePage } from "./(home)/HomePage";
 
-export default function Home() {
-  return <HomePage />;
+const Home = () => {
+    return (
+        <HomePage />
+    );
 }
+
+export default Home;

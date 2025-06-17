@@ -93,15 +93,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </div>
 
             <div className={styles.footer}>
-              <span
-                className={
-                  product.stock > 10
-                    ? styles.inStock
-                    : product.stock > 0
-                    ? styles.lowStock
-                    : styles.outOfStock
-                }
-              >
+              <span>
                 {product.stock > 0 ? `${product.stock} disponibles` : "Agotado"}
               </span>
 

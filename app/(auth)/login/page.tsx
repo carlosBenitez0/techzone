@@ -9,14 +9,13 @@ import {
   FaArrowRight,
   FaSpinner,
 } from "react-icons/fa";
-import { BsCpu } from "react-icons/bs";
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
+import { useAuth } from "@/app/hooks";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { isLoading, setIsLoading, error, setError, login } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,8 +24,39 @@ export const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
     setError("");
+
+    //validaciones
+    if (formData.password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!formData.email || !formData.password) {
+      setError("Todos los campos son obligatorios.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (
+      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      setError("El correo electrónico no es válido.");
+      setIsLoading(false);
+      return;
+    }
+    console.log(formData);
+
+    try {
+      /* setTimeout(() => {
+        login(formData);
+      }, 3000); */
+      login(formData);
+    } catch (err) {
+      setError(`Error en el servidor. Intenta nuevamente.`);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,10 +145,10 @@ export const Login = () => {
             </div>
             <button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               className={styles.submitButton}
             >
-              {loading ? (
+              {isLoading ? (
                 <FaSpinner className={styles.spinner} />
               ) : (
                 <>

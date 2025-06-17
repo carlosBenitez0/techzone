@@ -13,11 +13,12 @@ import {
 
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
+import { useAuth } from "@/app/hooks";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  const { isLoading, setIsLoading, error, setError, register } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,8 +28,44 @@ export const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
     setError("");
+    // validaciones
+    if (formData.name.length < 3) {
+      setError("El nombre debe tener al menos 3 caracteres.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!formData.name || !formData.email || !formData.password) {
+      setError("Todos los campos son obligatorios.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (
+      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      setError("El correo electrónico no es válido.");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setTimeout(() => {
+        register({ ...formData, id: 0 });
+      }, 3000);
+    } catch (err) {
+      setError(`Error en el servidor. Intenta nuevamente.`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,14 +167,14 @@ export const Register = () => {
 
             <button
               type="submit"
-              disabled={loading}
               className={styles.submitButton}
+              disabled={isLoading}
             >
-              {loading ? (
-                <FaSpinner className={styles.spinner} />
+              {isLoading ? (
+                <FaSpinner className={`${styles.spinner} ${styles.spinnerRotate}`} />
               ) : (
                 <>
-                  <span>Registrarme</span>
+                  Registrarse
                   <FaArrowRight className={styles.arrowIcon} />
                 </>
               )}

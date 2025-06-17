@@ -7,10 +7,12 @@ import {
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/app/hooks";
 
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const { isAuthenticated, isAdmin } = useAuth();
 
   // Verificar si es mobile o desktop
   useEffect(() => {
@@ -66,15 +68,20 @@ export const Navbar = () => {
           <Link href="/" className={styles.navLink}>
             Inicio
           </Link>
-          <Link href="/login" className={styles.navLink}>
-            Iniciar sesion
-          </Link>
-          <Link href={"/products"} className={styles.navLink}>
-            Productos
-          </Link>
-          <Link href="/contact" className={styles.navLink}>
-            Contacto
-          </Link>
+          {isAuthenticated ? (
+            <Link href="/profile" className={styles.navLink}>
+              Perfil
+            </Link>
+          ) : (
+            <>
+              <Link href={"/login"} className={styles.login}>
+                Iniciar sesión
+              </Link>
+              <Link href={"/register"} className={styles.register}>
+                Registrarse
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     );
@@ -87,13 +94,25 @@ export const Navbar = () => {
         <GlobalSearch />
         <div className={styles.navbarContent}>
           <ExploreDropdown />
-
-          <Link href={"/login"} className={styles.login}>
-            Iniciar sesión
+          {true ? (
+            <>
+            <Link href="/profile" className={styles.navLink}>
+              Perfil
+            </Link>
+            <Link href="/admin" className={styles.navLink}>
+            Admin
           </Link>
-          <Link href={"/register"} className={styles.register}>
-            Registrarse
-          </Link>
+          </>
+          ) : (
+            <>
+              <Link href={"/login"} className={styles.login}>
+                Iniciar sesión
+              </Link>
+              <Link href={"/register"} className={styles.register}>
+                Registrarse
+              </Link>
+            </>
+          )}
         </div>
       </div>
     );

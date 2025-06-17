@@ -15,7 +15,7 @@ export const LogoTechZoneNoText = ({ w, h, clickable }: LogoTypes) => {
         <div className={styles.logoContainer}>
           <div className={styles.logoIcon}>
             <div className={styles.logoImage}>
-              <GoCpu style={{ width: w, height: h }} />
+              <GoCpu style={{ minWidth: w, minHeight: h }} />
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@ export const LogoTechZoneNoText = ({ w, h, clickable }: LogoTypes) => {
           <div>
             <GoCpu
               className={styles.logoImage}
-              style={{ width: w, height: h }}
+              style={{ minWidth: w, minHeight: h }}
             />
           </div>
         </div>

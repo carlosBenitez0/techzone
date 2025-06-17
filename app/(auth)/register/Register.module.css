@@ -317,3 +317,7 @@
     scale: 1.2;
   }
 }
+
+.spinnerRotate {
+  animation: spin 1s linear infinite;
+}

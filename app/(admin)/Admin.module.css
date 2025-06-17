@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@100;400;700&display=swap");
+
+/* Layout */
+.adminContainer {
+    min-height: 100vh;
+    background-color: var(--gray-100);
+    display: flex;
+  }
+  
+  .mainContent {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .contentArea {
+    padding: 2rem;
+  }
+  
+  /* Access Denied */
+  .accessDenied {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+  }
+  
+  .accessDeniedContent {
+    text-align: center;
+  }
+  
+  .accessDeniedTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+  }
+  
+  .accessDeniedText {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+  }
+  
+  .accessDeniedButton {
+    background-color: var(--primary-600);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .accessDeniedButton:hover {
+    background-color: var(--primary-700);
+  }
+  
+  /* Stats Grid */
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* display: flex;
+    flex-wrap: wrap; */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .statsGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .statsGrid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  /* Stat Card */
+  .statCard {
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+
+  .totalProducts{
+    background-image: linear-gradient(to right, var(--primary-500), var(--primary-600) );
+    opacity: 0.8;
+    
+    
+  }  
+
+  .totalValue{
+    background-image: linear-gradient(to right, var(--accent-800), var(--accent-900) );
+    opacity: 0.9;
+    /* flex-grow: 1; */
+  }
+  
+  .lowStock{
+    background-image: linear-gradient(to right, #FFA500, #fe8834);
+    opacity: 0.9; 
+  }
+
+  
+  
+  .featured{
+    /* //purple */
+    background-image: linear-gradient(to right, #aa00c4, #6b008e);
+    opacity: 0.8;
+    
+  }
+  
+  .statCard:hover {
+    transform: scale(1.05);
+  }
+  
+  .statCardContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .statCardText {
+    font-size: 1.6rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+  
+  .statCardValue {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .statCardIcon {
+    width: 4rem;
+    height: 4rem;
+    opacity: 0.8;
+  }
+  
+  /* Recent Products */
+  .recentProducts {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .recentProductsHeader {
+    background: var(--dark-gradient );
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .recentProductsTitle {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .seeAllButton{
+    background-color: transparent;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .seeAllButton:hover {
+    background-color: var(--gray-700);
+  }
+  
+  .recentProductsList {
+    padding: 1.5rem;
+  }
+  
+  .recentProductItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--gray-100);
+    border-radius: 0.75rem;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .recentProductItem:hover {
+    background-color: var(--gray-200);
+  }
+  
+  .recentProductInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .recentProductImage {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  
+  .recentProductName {
+    font-weight: 500;
+    color: var(--gray-900);
+  }
+  
+  .recentProductCategory {
+    font-size: 1.4rem;
+    color: var(--gray-500);
+  }
+  
+  .recentProductPrice {
+    font-weight: bold;
+    color: var(--gray-900);
+  }
+  
+  .recentProductStock {
+    font-size: 1.4rem;
+    color: var(--gray-500);
+  }
+  
+  /* Empty State */
+  .emptyState {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .emptyStateIcon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--gray-400);
+    margin: 0 auto 1rem;
+  }
+  
+  .emptyStateTitle {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+  
+  .emptyStateText {
+    color: var(--gray-600);
+  }
+
+  .lowStockTable{
+    color: var(--red-600);
+    opacity: 0.5;
+  }

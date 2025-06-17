@@ -4,11 +4,16 @@
 /* ===== Variables CSS ===== */
 :root {
   /* Colores */
+  --primary: #e3f2fd7b;
   --primary-50: #e3f2fd;
   --primary-100: #bbdefb;
+  --primary-200: #93cfff;
+  --primary-300: #60a5fa;
+  --primary-400: #3b82f6;
   --primary-500: #0d6efd;
   --primary-600: #0a5cd6;
   --primary-700: #084bb8;
+  --primary-800: #084bb8;
   --primary-900: #042a66;
 
   --gray-900: #212529;
@@ -17,13 +22,47 @@
   --gray-600: #6c757d;
   --gray-500: #adb5bd;
   --gray-400: #ced4da;
+  --gray-300: #ced4da;
   --gray-200: #e9ecef;
   --gray-100: #f8f9fa;
 
+  --accent: #66ffb352;
+  --accent-50: #66ffb3b7;
+  --accent-100: #66ffb3;
+  --accent-200: #66ffb3;
+  --accent-300: #66ffb3;
   --accent-400: #66ffb3;
   --accent-500: #00ff9d;
   --accent-600: #00e68a;
   --accent-700: #00cc7a;
+  --accent-800: #00b76e;
+  --accent-900: #00965a;
+
+  --yellow: #ffff665e;
+  --yellow-50: #ffff66b7;   
+  --yellow-100: #ffff66;    
+  --yellow-200: #ffff66;    
+  --yellow-300: #ffff66;    
+  --yellow-400: #ffff66;    
+  --yellow-500: #ffea00;    
+  --yellow-600: #e6d300;    
+  --yellow-700: #ccb800;    
+  --yellow-800: #ccb800;    
+  --yellow-900: #918200;    
+
+  --red: #ff666666;
+  --red-50: #ff6666b7;   
+  --red-100: #ff6666;    
+  --red-200: #ff6666;    
+  --red-300: #ff6666;    
+  --red-400: #ff6666;    
+  --red-500: #ff0000;    
+  --red-600: #e60000;    
+  --red-700: #cc0000;    
+  --red-800: #cc0000;    
+  --red-900: #a00000;    
+
+
   /* Gradientes */
   --tech-gradient: linear-gradient(135deg, #0d6efd 0%, #00ff9d 100%);
   --dark-gradient: linear-gradient(135deg, #212529 0%, #343a40 100%);

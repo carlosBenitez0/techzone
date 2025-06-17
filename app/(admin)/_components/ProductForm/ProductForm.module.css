@@ -1,0 +1,280 @@
+/* ProductForm.module.css */
+
+/* Modal Overlay */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 1rem;
+  }
+  
+  /* Modal Container */
+  .modalContainer {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 70rem;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  
+  /* Modal Header */
+  .modalHeader {
+    background: var(--tech-gradient);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .modalTitle {
+    font-family: var(--font-orbitron);
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  
+  .closeButton {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .closeButton:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+    color: var(--gray-900);
+  }
+  
+  .closeIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  /* Form Content */
+  .formContent {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(90vh - 120px);
+  }
+  
+  .sectionTitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Form Grid */
+  .formGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .formGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Form Fields */
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .formLabel {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+  }
+  
+  .formInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  
+  .formInput:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+  }
+  
+  .formSelect {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Checkbox */
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkboxInput {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-300);
+    margin-right: 0.5rem;
+    color: var(--primary-600);
+  }
+  
+  .checkboxLabel {
+    font-size: 1.4rem;
+    color: var(--gray-700);
+  }
+  
+  
+  .imageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .imageInput {
+    flex: 1;
+  }
+  
+  /* Specifications */
+  .specificationsSection {
+    margin-top: 1.5rem;
+  }
+  
+  .specForm {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .specForm {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .addSpecButton {
+    background-color: var(--primary-600);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease; 
+    border: none;
+    cursor: pointer;
+  }
+  
+  .addSpecButton:hover {
+    background-color: var(--primary-700);
+  }
+  
+  .specList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .specItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--gray-50);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .specText {
+    font-size: 1.4rem;
+  }
+  
+  .specKey {
+    font-weight: 600;
+  }
+  
+  .removeSpecButton {
+    color: var(--red-600);
+    cursor: pointer;
+    background-color: var(--red-50);
+    opacity: 0.8;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    border: none;
+  }
+  
+  .removeSpecButton:hover {
+    color: var(--red-700);
+    opacity: 1;
+  }
+  
+  .removeSpecIcon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  
+  /* Form Actions */
+  .formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+  }
+  
+  .cancelButton {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--gray-300);
+    color: var(--gray-700);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background-color: var(--gray-50);
+  }
+  
+  .submitButton {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-600);
+    color: white;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .submitButton:hover {
+    background-color: var(--primary-700);
+    transform: scale(1.05);
+  }
+  
+  .submitIcon {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 0.5rem;
+  }
