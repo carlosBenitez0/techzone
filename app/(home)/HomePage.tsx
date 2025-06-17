@@ -11,36 +11,38 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi";
-import { productsData } from "../utils/data/products";
+import { useProductsStore } from "../store";
 import styles from "./HomePage.module.css";
 import { CategoryCard, ProductCard } from "../components/ui";
 import { Footer, Navbar } from "../components/shared";
 
 export const HomePage = () => {
-  // const featuredProducts = productsData.filter((product) => product.featured);
+  
+  const { products } = useProductsStore();
+
   const categories = [
     {
       name: "Laptops",
       icon: FaLaptop,
-      count: 10 /* productsData.filter((p) => p.category === "Laptops").length */,
+      count: products.filter((p) => p.category === "Laptops").length,
       gradient: "--laptops-gradient",
     },
     {
       name: "Componentes",
       icon: FaMicrochip,
-      count: 5 /* productsData.filter((p) => p.category === "Componentes").length */,
+      count: products.filter((p) => p.category === "Componentes").length,
       gradient: "--components-gradient",
     },
     {
       name: "Gaming",
       icon: FaGamepad,
-      count: 4 /* productsData.filter((p) => p.category === "Gaming").length */,
+      count: products.filter((p) => p.category === "Gaming").length,
       gradient: "--gaming-gradient",
     },
     {
-      name: "Accesorios",
+      name: "Monitores",
       icon: FaDesktop,
-      count: 1 /* productsData.filter((p) => p.category === "Accesorios").length */,
+      count: products.filter((p) => p.category === "Monitores").length,
       gradient: "--accessories-gradient",
     },
   ];
@@ -198,7 +200,7 @@ export const HomePage = () => {
             </div>
 
             <div className={styles.productsGrid}>
-              {productsData.slice(0, 8).map((product, index) => (
+              {products.slice(0, 8).map((product, index) => (
                 <div key={index} style={{ animationDelay: `${index * 0.1}s` }}>
                   <ProductCard product={product} />
                 </div>

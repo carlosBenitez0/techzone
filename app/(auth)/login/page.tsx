@@ -11,52 +11,31 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
-import { useAuth } from "@/app/hooks";
+import { useAuthStore } from "@/app/store";
+import { useRouter } from "next/navigation";
+import { User } from "@/app/store";
 
 export const Login = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { isLoading, setIsLoading, error, setError, login } = useAuth();
-
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<User, 'id' | 'name'>>({
     email: "",
     password: "",
   });
+  
+  const { isLoading, error, login } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    //validaciones
-    if (formData.password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
-      setIsLoading(false);
-      return;
+    try{
+      const result = await login(formData);
+      if(result){
+        router.push("/");
+      }
+    }catch(err){
+      console.log(err);
     }
-
-    if (!formData.email || !formData.password) {
-      setError("Todos los campos son obligatorios.");
-      setIsLoading(false);
-      return;
-    }
-
-    if (
-      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-    ) {
-      setError("El correo electrónico no es válido.");
-      setIsLoading(false);
-      return;
-    }
-    console.log(formData);
-
-    try {
-      /* setTimeout(() => {
-        login(formData);
-      }, 3000); */
-      login(formData);
-    } catch (err) {
-      setError(`Error en el servidor. Intenta nuevamente.`);
-    }
+    
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

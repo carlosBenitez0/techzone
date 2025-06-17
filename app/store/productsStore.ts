@@ -773,7 +773,6 @@ export const useProductsStore = create<ProductsStore>()(
                 ],  
                 getRecentProductsFirst: () => {
                     const products = get().products;
-                    // Creamos una copia para no mutar el array original
                     return [...products].reverse();
                   },
                 addProduct: (product: Omit<Product, 'id'>) => set((state) => {

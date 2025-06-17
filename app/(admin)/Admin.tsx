@@ -12,15 +12,15 @@ import {
 } from 'react-icons/fa';
 import styles from './Admin.module.css';
 import { Product } from '@/types/products';
-import { useAuth } from '../hooks';
 import { ProductForm } from './_components/ProductForm/ProductForm';
 import { AdminSidebar } from './_components/AdminSidebar/AdminSidebar';
 import { ProductsTable } from './_components/ProductsTable/ProductsTable';
 import { useProductsStore } from '../store';
+import { useAuthStore } from '../store/authStore';
 
 export const Admin: React.FC = () => {
   const router = useRouter();
-  const { userData, logout, isAdmin } = useAuth();
+  const { userData } = useAuthStore();
   const [activeSection, setActiveSection] = useState('dashboard');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showProductForm, setShowProductForm] = useState(false);
@@ -29,26 +29,8 @@ export const Admin: React.FC = () => {
  
   const products = useProductsStore((state)=> state.products);
   const recentProductsFirst = [...products].reverse();
- const addProduct = useProductsStore((state)=> state.addProduct);
- const editProduct = useProductsStore((state)=> state.editProduct);
-
-  // Redirect if not admin
-  if (!isAdmin) {
-    return (
-      <div className={styles.accessDenied}>
-        <div className={styles.accessDeniedContent}>
-          <h2 className={styles.accessDeniedTitle}>Acceso Denegado</h2>
-          <p className={styles.accessDeniedText}>No tienes permisos para acceder al panel administrativo</p>
-          <button
-            onClick={() => router.push('/')}
-            className={styles.accessDeniedButton}
-          >
-            Volver al Inicio
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const addProduct = useProductsStore((state)=> state.addProduct);
+  const editProduct = useProductsStore((state)=> state.editProduct);
 
   const handleSeeAllProducts = () => {
     setAllProducts((prev) => !prev)
@@ -74,8 +56,6 @@ export const Admin: React.FC = () => {
     setEditingProduct(null);
   };
 
-  
-
   const handleCancelForm = () => {
     setShowProductForm(false);
     setEditingProduct(null);
@@ -96,6 +76,23 @@ export const Admin: React.FC = () => {
     [recentProductsFirst]
   );
 
+  //Redirect if not admin 
+   if (userData.roll !== 'admin') {
+    return (
+      <div className={styles.accessDenied}>
+        <div className={styles.accessDeniedContent}>
+          <h2 className={styles.accessDeniedTitle}>Acceso Denegado</h2>
+          <p className={styles.accessDeniedText}>No tienes permisos para acceder al panel administrativo</p>
+          <button
+            onClick={() => router.push('/')}
+            className={styles.accessDeniedButton}
+          >
+            Volver al Inicio
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const renderDashboard = () => (
     <div>

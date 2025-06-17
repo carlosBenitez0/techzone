@@ -7,12 +7,16 @@ import {
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/app/hooks";
+import { useAuthStore } from "@/app/store";
+import { FaRegUser } from "react-icons/fa";
+import { IoSettingsOutline } from "react-icons/io5";
+
 
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const { isAuthenticated, isAdmin } = useAuth();
+  const { isAuthenticated, userData } = useAuthStore();
+  console.log(isAuthenticated, userData.roll);
 
   // Verificar si es mobile o desktop
   useEffect(() => {
@@ -68,9 +72,17 @@ export const Navbar = () => {
           <Link href="/" className={styles.navLink}>
             Inicio
           </Link>
-          {isAuthenticated ? (
+          {isAuthenticated === true && userData.roll === 'user' ? (
             <Link href="/profile" className={styles.navLink}>
-              Perfil
+              <div className={styles.navIconContainer}>
+                <FaRegUser className={styles.navIcon} />
+              </div>
+            </Link>
+          ) : isAuthenticated === true && userData.roll === 'admin' ? (
+            <Link href="/admin" className={styles.navLink}>
+              <div className={styles.navIconContainer}>
+                <IoSettingsOutline className={styles.navIcon} />
+              </div>
             </Link>
           ) : (
             <>
@@ -94,15 +106,20 @@ export const Navbar = () => {
         <GlobalSearch />
         <div className={styles.navbarContent}>
           <ExploreDropdown />
-          {true ? (
+          {isAuthenticated === true && userData.roll === 'user' ? (
             <>
             <Link href="/profile" className={styles.navLink}>
-              Perfil
+              <div className={styles.navIconContainer}>
+                <FaRegUser className={styles.navIcon} />
+              </div>
             </Link>
-            <Link href="/admin" className={styles.navLink}>
-            Admin
-          </Link>
           </>
+          ) : isAuthenticated === true && userData.roll === 'admin' ? (
+            <Link href="/admin" className={styles.navLink}>
+              <div className={styles.navIconContainer}>
+                <IoSettingsOutline className={styles.navIcon} />
+              </div>
+            </Link>
           ) : (
             <>
               <Link href={"/login"} className={styles.login}>

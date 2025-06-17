@@ -78,6 +78,32 @@
   width: 100%;
 }
 
+.navIconContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 100%;
+  background-color: var(--primary-600);
+  scale: 1 ;
+  transition: background-color 0.2s ease, scale 0.2s ease;
+}
+
+.navIconContainer:hover {
+  cursor: pointer;
+  background-color: var(--primary-500);
+  scale: 1.04 ;
+}
+
+.navIconContainer:hover .navIcon {
+  color: var(--primary-100);
+}
+
+.navIcon {
+  font-size: 2rem;
+  color: var(--primary-100);
+}
+
 .navLink {
   position: relative;
   text-decoration: none;

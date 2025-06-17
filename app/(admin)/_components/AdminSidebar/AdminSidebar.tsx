@@ -1,4 +1,4 @@
-// Si da error eliminar los spacebetween
+"use client"
 import React from 'react';
 import { 
   FaThLarge as LayoutDashboard,
@@ -7,13 +7,13 @@ import {
   FaChartBar as BarChart3,
   FaCog as Settings,
   FaSignOutAlt as LogOut,
-  FaMicrochip as Cpu,
   FaChevronLeft as ChevronLeft,
   FaChevronRight as ChevronRight
 } from 'react-icons/fa';
-import { useAuth } from '@/app/hooks/useAuth';
 import styles from './AdminSidebar.module.css';
 import { LogoTechZoneNoText } from '@/app/components/shared';
+import { useAuthStore } from '@/app/store/authStore';
+import { useRouter } from 'next/navigation';
 
 interface AdminSidebarProps {
   activeSection: string;
@@ -28,7 +28,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   isCollapsed,
   onToggleCollapse
 }) => {
-  const { userData, logout } = useAuth();
+  const { userData, logout } = useAuthStore();
+  const router = useRouter();
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
@@ -50,7 +51,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           <div className={styles.brandContainer} 
             style={{justifyContent: isCollapsed ? 'center' : 'space-between'}}  
           >
-            <LogoTechZoneNoText w={24} h={24} />
+            <LogoTechZoneNoText w={24} h={24} clickable={true} />
             {!isCollapsed && (
               <div className={styles.brandText}>
                 <h1 className={styles.brandTitle}>TechZone</h1>
@@ -131,7 +132,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       {/* Logout Button */}
       <div className={styles.logoutContainer}>
         <button
-          onClick={logout}
+          onClick={()=> {logout(); router.push('/')}}
           className={styles.logoutButton}
           style={{
             justifyContent: isCollapsed ? 'center' : 'space-between'
@@ -143,8 +144,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           )}
         </button>
       </div>
-
-      
     </div>
   );
 };
