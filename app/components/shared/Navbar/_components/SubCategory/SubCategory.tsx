@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./SubCategory.module.css";
+import Link from "next/link";
 
 interface SubCategoryProps {
   subCategory: { name: string; image: string };
@@ -8,7 +9,7 @@ interface SubCategoryProps {
 
 export const SubCategory = ({ subCategory }: SubCategoryProps) => {
   return (
-    <div className={styles.subCategory}>
+    <Link href={`/products-category/${subCategory.name}`} className={styles.subCategory}>
       <Image
         src={subCategory.image}
         alt={subCategory.name}
@@ -17,6 +18,6 @@ export const SubCategory = ({ subCategory }: SubCategoryProps) => {
         className={styles.image}
       />
       <p className={styles.name}>{subCategory.name}</p>
-    </div>
+    </Link>
   );
 };

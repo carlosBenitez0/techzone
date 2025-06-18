@@ -4,6 +4,8 @@ import styles from "./SearchDropdown.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { FiExternalLink } from "react-icons/fi";
 import { useClickOutside } from "@/app/hooks";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const SearchDropdown = () => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -22,6 +24,8 @@ export const SearchDropdown = () => {
     "Software",
   ]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
+
+  const router = useRouter();
 
   // 1. Usamos el hook useClickOutside para detectar clics fuera del dropdown
   const dropdownRef = useClickOutside<HTMLDivElement>(() =>
@@ -59,7 +63,8 @@ export const SearchDropdown = () => {
       {dropdownVisible && (
         <div className={styles.searchDropdownContent}>
           {categories.map((category, index) => (
-            <div
+            <Link
+              href={`/products-category/${category}`}
               className={`${styles.searchDropdownItem} ${
                 selectedCategory === category && styles.searchDropdownItemActive
               }`}
@@ -68,7 +73,7 @@ export const SearchDropdown = () => {
             >
               <FiExternalLink className={styles.listItemIcon} />
               <p>{category}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
