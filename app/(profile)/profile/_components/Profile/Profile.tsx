@@ -224,7 +224,7 @@ export const Profile: React.FC = () => {
               <FaUser className={`${styles.statIcon} ${styles.textBlue600}`} />
             </div>
             <h3 className={styles.statTitle}>Cuenta Activa</h3>
-            <p className={styles.statDescription}>Miembro desde enero 2025</p>
+            <p className={styles.statDescription}>Miembro desde {new Date().toLocaleDateString()}</p>
           </div>
 
           <div className={styles.statCard}>

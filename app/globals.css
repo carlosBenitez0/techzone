@@ -50,17 +50,30 @@
   --yellow-800: #ccb800;    
   --yellow-900: #918200;    
 
-  --red: #ff666666;
-  --red-50: #ff6666b7;   
+  --red: #c266ff52;
+  --red-50: #ad66ffb7;   
   --red-100: #ff6666;    
-  --red-200: #ff6666;    
-  --red-300: #ff6666;    
-  --red-400: #ff6666;    
+  --red-200: #ff4f4f;    
+  --red-300: #ff3939;    
+  --red-400: #ff2222;    
   --red-500: #ff0000;    
   --red-600: #e60000;    
   --red-700: #cc0000;    
   --red-800: #cc0000;    
   --red-900: #a00000;    
+
+  /* //purple */
+  --purple: #db66ff65;
+  --purple-50: #db66ff65;   
+  --purple-100: #d343ff;    
+  --purple-200: #cd27ff;    
+  --purple-300: #c600ff;    
+  --purple-400: #b900ff;    
+  --purple-500: #b200ff;    
+  --purple-600: #a500ff;    
+  --purple-700: #9800ff;    
+  --purple-800: #8b00ff;    
+  --purple-900: #7e00ff;   
 
 
   /* Gradientes */

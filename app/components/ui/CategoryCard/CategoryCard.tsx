@@ -18,7 +18,7 @@ export const CategoryCard = ({
 }: CategoryCardProps) => {
   return (
     <div className={styles.card} style={{ background: `var(${gradient})` }}>
-      <Link href={`/category/${name.toLowerCase()}`} className={styles.link}>
+      <Link href={`/products-category/${name.toLowerCase()}`} className={styles.link}>
         {/* Animated Background Elements */}
         <div className={styles.backgroundElements}>
           <div className={`${styles.floatingOrb} ${styles.orb1}`}></div>

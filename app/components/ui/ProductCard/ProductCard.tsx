@@ -4,19 +4,20 @@ import { FaShoppingCart, FaBolt } from "react-icons/fa";
 import { Product } from "@/types/products";
 
 import styles from "./ProductCard.module.css";
-import { StarRating } from "../StartRating/StartRating";
+import { StarRating } from "@/app/components/ui/StarRating/StarRating";
 
 interface ProductCardProps {
   product: Product;
+  onNavigate: (route: string) => void;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
   const discountPercentage = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : 0;
 
   return (
-    <Link href={`/product/${product.id}`} className={styles.productCard}>
+    <Link href={`/product/${product.id}`} className={styles.productCard} onClick={() => onNavigate(`/product/${product.id}`)}>
       <div className={styles.card}>
         {/* Animated Border Glow */}
         <div className={styles.glowBorder}>

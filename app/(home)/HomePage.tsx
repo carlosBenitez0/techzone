@@ -106,7 +106,7 @@ export const HomePage = () => {
               </p>
 
               <div className={styles.buttonGroup}>
-                <Link href="/products" className={styles.primaryButton}>
+                {/* <Link href="/products" className={styles.primaryButton}>
                   <span className={styles.buttonContent}>
                     Explorar Catálogo
                     <HiChevronRight className={styles.buttonIcon} />
@@ -120,7 +120,7 @@ export const HomePage = () => {
                       className={`${styles.buttonIcon} ${styles.bounceIcon}`}
                     />
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
