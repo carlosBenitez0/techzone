@@ -187,6 +187,24 @@
   overflow: hidden;
 }
 
+.ratingContainer {
+  margin-bottom: 0.75rem;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+}
+
+.ratingText{
+  font-size: 1.3rem; 
+  color: #6b7280; 
+  background-color: #f3f4f6; 
+  padding-left: 0.5rem; 
+  padding-right: 0.5rem; 
+  padding-top: 0.25rem; 
+  padding-bottom: 0.25rem; 
+  border-radius: 9999px; 
+}
+
 .card:hover .productName {
   color: var(--primary-600);
 }

@@ -12,6 +12,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
+  //(1 - 75 / 100) * 100 = (1 - 0.75) * 100 = 0.25 * 100 = 25%
   const discountPercentage = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : 0;
@@ -51,7 +52,7 @@ export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
           {/* Floating Badges */}
           {product.freeShipping && (
             <div className={styles.freeShippingBadge}>
-              <FaBolt className="inline mr-1 text-xs" />
+              <FaBolt style={{ display: "inline", marginRight: "0.5rem", fontSize: "0.75rem" }} />
               Envío Gratis
             </div>
           )}
@@ -75,10 +76,14 @@ export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
           <div>
             <h3 className={styles.productName}>{product.name}</h3>
 
-            <div className="mb-3 flex items-center justify-between">
+            <div 
+              className={styles.ratingContainer}
+            >
               <StarRating rating={product.rating} size="sm" />
-              <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                ({product.reviews}) Reseñas
+              <span 
+                className={styles.ratingText}
+              >
+                ({product.reviews}) Reseñas
               </span>
             </div>
 

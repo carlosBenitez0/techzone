@@ -19,7 +19,7 @@ export const ProductsCategory: React.FC<ProductsCategoryProps> = ({ category }) 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 5000 });
 
   const handleRouter =(route: string) => {
     router.push(route);
@@ -134,14 +134,22 @@ export const ProductsCategory: React.FC<ProductsCategoryProps> = ({ category }) 
               <div className={styles.priceInputs}>
                 <input
                   type="number"
-                  value={priceRange.min}
+                  value={
+                    priceRange.min.toString().startsWith('0') 
+                    && priceRange.min.toString().length > 1 ? priceRange.min.toString().slice(1) 
+                    : priceRange.min.toString()
+                  }
                   onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
                   placeholder="Mín"
                   className={styles.priceInput}
                 />
                 <input
                   type="number"
-                  value={priceRange.max}
+                  value={
+                    priceRange.max.toString().startsWith('0') 
+                    && priceRange.max.toString().length > 1 ? priceRange.max.toString().slice(1) 
+                    : priceRange.max.toString()
+                  }
                   onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
                   placeholder="Máx"
                   className={styles.priceInput}
@@ -171,7 +179,7 @@ export const ProductsCategory: React.FC<ProductsCategoryProps> = ({ category }) 
             <button
               onClick={() => {
                 setSearchTerm('');
-                setPriceRange({ min: 0, max: 10000 });
+                setPriceRange({ min: 0, max: 5000 });
                 setSortBy('name');
               }}
               className={styles.clearButton}
@@ -235,8 +243,6 @@ export const ProductsCategory: React.FC<ProductsCategoryProps> = ({ category }) 
                               </span>
                             </div>
                             <button
-                            // debo ir al product que esta en el folder(products) la url desde aqui es products-category/product/${product.id}
-                            //y necesito que sea /product/${product.id}
                               onClick={() => handleRouter(`/product/${product.id}`)}
                               className={styles.listButton}
                             >

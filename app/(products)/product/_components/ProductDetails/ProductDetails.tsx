@@ -48,7 +48,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
   const router = useRouter();
   const { products } = useProductsStore();
   const [activeTab, setActiveTab] = useState('description');
-  const [selectedImage, setSelectedImage] = useState(0);
+  // const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [relatedSlideIndex, setRelatedSlideIndex] = useState(0);
   
@@ -271,7 +271,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                 <div>
                   <h3 className={styles.tabTitle}>Especificaciones Técnicas</h3>
                   <div className={styles.specsGrid}>
-                    {Object.entries(product?.specifications || {}).map(([key, value], index) => (
+                    {Object.entries(product?.specifications || {}).map(([key, value]) => (
                       <div key={key} className={styles.specItem}>
                         <span className={styles.specKey}>{key}:</span>
                         <span className={styles.specValue}>{value}</span>
@@ -351,6 +351,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
               
               {relatedProducts.length > 3 && (
                 <div className={styles.pagination}>
+                  {/* 8 / 3 = 2.666... -> Math.ceil(2.666) = 3 (necesitas 3 grupos: [0-2], [3-5], [6-7]). */}
                   {Array.from({ length: Math.ceil(relatedProducts.length / 3) }).map((_, index) => (
                     <button
                       key={index}

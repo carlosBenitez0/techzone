@@ -14,7 +14,7 @@
     var(--gray-800) 50%,
     var(--primary-900) 100%
   );
-  height: calc(100vh - 4rem - 8rem);
+  height: calc(100vh - 4rem - 10rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -216,7 +216,7 @@
     var(--accent-500) 100%
   );
   color: white;
-  padding: 1rem 0;
+  padding: 2rem 0;
   overflow: hidden;
   background-size: 200% 200%;
   animation: gradientShift 4s ease-in-out infinite;
