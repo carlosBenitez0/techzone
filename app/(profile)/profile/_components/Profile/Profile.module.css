@@ -1,0 +1,355 @@
+/* Profile.module.css */
+.container {
+    min-height: 100vh;
+    background-color: var(--gray-200);
+    padding: 2rem 0 4rem 0;
+    
+  }
+  
+  .loginPrompt {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-200);
+    
+  }
+  
+  .loginContent {
+    text-align: center;
+  }
+  
+  .loginTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+  }
+  
+  .loginText {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+  }
+  
+  .loginButton {
+    background-color: var(--primary-600);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .loginButton:hover {
+    background-color: var(--primary-700);
+  }
+  
+  .profileContainer {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .profileContainer {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .profileContainer {
+      padding: 2rem 2rem;
+    }
+  }
+  
+  .headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  
+  .backButton {
+    display: flex;
+    align-items: center;
+    color: var(--gray-600);
+    transition: color 0.3s ease;
+    line-height: 1.5rem;
+    padding: 1rem 0rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .backButton:hover {
+    color: var(--primary-600);
+  }
+  
+  .backIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+  }
+  
+  .logoutButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--red-600);
+    font-weight: 500;
+    padding: 1rem 2rem;
+    line-height: 1.5rem;
+    border: 1px solid var(--red-600);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    background-color: transparent;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .logoutButton:hover {
+    color: var(--red-700);
+    border-color: var(--red-700);
+    background-color: var(--red-50);
+    opacity: 0.8;
+  }
+  
+  .profileHeader {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+  }
+  
+  .profileHeaderContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .profileHeaderInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatarContainer {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    border-radius: 9999px;
+    margin-right: 1.5rem;
+  }
+  
+  .avatarIcon {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .profileTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-orbitron);
+  }
+  
+  .profileSubtitle {
+    color: var(--primary-200);
+    
+  }
+  
+  .editButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--gray-200);
+    border: none;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+  }
+  
+  .editButton:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+  }
+  
+  .editIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .profileCard {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .profileContent {
+    padding: 2rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+  }
+  
+  .fieldGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .fieldGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .fieldContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fieldLabel {
+    display: flex;
+    align-items: center;
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+  
+  .fieldIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+    color: var(--gray-500);
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.75rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .inputField:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--primary-500);
+  }
+  
+  .staticField {
+    padding: 0.75rem 1rem;
+    background-color: var(--gray-50);
+    border-radius: 0.75rem;
+    color: var(--gray-900);
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .saveButton, .cancelButton {
+    border: none;
+    cursor: pointer
+  }
+  
+  .saveButton {
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-600);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    
+  }
+  
+  .saveButton:hover {
+    background-color: var(--primary-700);
+    transform: scale(1.05);
+  }
+  
+  .cancelButton {
+    display: flex;
+    align-items: center;
+    background-color: var(--gray-200);
+    color: var(--gray-700);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    
+  }
+  
+  .cancelButton:hover {
+    background-color: var(--gray-300);
+    transform: scale(1.05);
+  }
+  
+  .buttonIcon {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+  }
+  
+  .statsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .statsGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .statCard {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .statIconContainer {
+    padding: 0.75rem;
+    border-radius: 9999px;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .statIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .statTitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+  
+  .statDescription {
+    font-size: 1.4rem;
+    color: var(--gray-600);
+    
+  }

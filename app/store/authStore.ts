@@ -6,6 +6,8 @@ export interface User {
     name?: string;
     email: string;
     password: string;
+    address?: string;
+    phone?: string;
     roll?: string;  // user, admin
 }
 
@@ -24,6 +26,7 @@ interface AuthStore {
     setError: (error: string | null) => void;
     login: (user: User) => Promise<boolean | undefined>;
     register: (user: Omit<User, 'id'>) => Promise<boolean | undefined>;
+    updateProfile: (user: User) => void;
     logout: () => void;
     checkAdmin: (user: authUser) => boolean;
 }
@@ -34,6 +37,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         name: "",
         email: "",
         password: "",
+        address: "",
+        phone: "",
         roll: ""
     },
     registeredUsers: [
@@ -86,7 +91,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
             const newUser = {
                 ...user,
                 id: registeredUsers.length + 1,
-                roll: 'user'
+                roll: 'user',
+                address: '',
+                phone: ''
             };
             
             set((state) => ({
@@ -108,8 +115,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
     checkAdmin: (user: User) => {
         const adminAccounts: User[] = [
-            {email: 'admin@gmail.com', password: 'admin123', roll: 'admin'}, 
-            {email: 'superuser@gmail.com', password: 'superuser123', roll: 'admin'}
+            {email: 'admin@gmail.com', password: 'admin123', roll: 'admin', address: '', phone: ''}, 
+            {email: 'superuser@gmail.com', password: 'superuser123', roll: 'admin', address: '', phone: ''}
         ];
         return adminAccounts.some(admin => admin.email === user.email && admin.password === user.password && admin.roll === 'admin');
     },
@@ -157,7 +164,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
                     name: userFound.name,
                     email: userFound.email,
                     password: userFound.password,
-                    roll: isAdminCheck ? 'admin' : 'user'
+                    roll: isAdminCheck ? 'admin' : 'user',
+                    address: userFound.address,
+                    phone: userFound.phone
                 },
                 isAuthenticated: true,
                 isLoading: false,
@@ -172,6 +181,19 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         }
     },
 
+    updateProfile: (user: Omit<User, 'id' | 'roll' | 'password'>) => {
+        const { userData } = get();
+        set({
+            userData: {
+                ...userData,
+                name: user.name,
+                email: user.email,
+                address: user.address,
+                phone: user.phone
+            }
+        });
+    },
+
     // Cierre de sesión
     logout: () => {
         set({
@@ -180,7 +202,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
                 name: "",
                 email: "",
                 password: "",
-                roll: ""
+                roll: "",
+                address: "",
+                phone: ""
             },
             isAuthenticated: false,
             isLoading: false,
