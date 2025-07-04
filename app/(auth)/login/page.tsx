@@ -15,27 +15,26 @@ import { useAuthStore } from "@/app/store";
 import { useRouter } from "next/navigation";
 import { User } from "@/app/store";
 
-export const Login = () => {
+export const Page = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState<Omit<User, 'id' | 'name'>>({
+  const [formData, setFormData] = useState<Omit<User, "id" | "name">>({
     email: "",
     password: "",
   });
-  
+
   const { isLoading, error, login } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try{
+    try {
       const result = await login(formData);
-      if(result){
+      if (result) {
         router.push("/");
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-    
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,4 +154,4 @@ export const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Page;
