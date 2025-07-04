@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { AiOutlineClose as X, AiOutlineSave as Save, AiOutlinePlus as Plus, AiOutlineMinus as Minus } from 'react-icons/ai';
-import { FaTrash } from 'react-icons/fa';
-import { Product } from '@/types/products';
-import styles from './ProductForm.module.css';
+import React, { useState, useEffect } from "react";
+import { AiOutlineClose as X, AiOutlineSave as Save } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
+import { Product } from "@/types/products";
+import styles from "./ProductForm.module.css";
 
 interface ProductFormProps {
   product?: Product;
-  onSave: (product: Omit<Product, 'id'> | Product) => void;
+  onSave: (product: Omit<Product, "id"> | Product) => void;
   onCancel: () => void;
   isEdit?: boolean;
 }
@@ -15,25 +15,25 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   product,
   onSave,
   onCancel,
-  isEdit = false
+  isEdit = false,
 }) => {
-  const [formData, setFormData] = useState<Omit<Product, 'id'>>({
-    name: '',
-    category: '',
+  const [formData, setFormData] = useState<Omit<Product, "id">>({
+    name: "",
+    category: "",
     price: 0,
     originalPrice: 0,
-    image: '',
+    image: "",
     rating: 5,
     reviews: 0,
     stock: 0,
     freeShipping: false,
     featured: false,
-    description: '',
-    specifications: {}
+    description: "",
+    specifications: {},
   });
 
-  const [specKey, setSpecKey] = useState('');
-  const [specValue, setSpecValue] = useState('');
+  const [specKey, setSpecKey] = useState("");
+  const [specValue, setSpecValue] = useState("");
 
   const categories = [
     "Laptops",
@@ -46,7 +46,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     "Audio",
     "Redes",
     "Impresión",
-    "Oficina"
+    "Oficina",
   ];
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         freeShipping: product.freeShipping || false,
         featured: product.featured || false,
         description: product.description,
-        specifications: product.specifications || {}
+        specifications: product.specifications || {},
       });
     }
   }, [product]);
@@ -72,28 +72,28 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     e.preventDefault();
     const productData = {
       ...formData,
-      id: product?.id
+      id: product?.id,
     };
-    
+
     onSave(productData);
   };
 
   const addSpecification = () => {
     if (specKey.trim() && specValue.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         specifications: {
           ...prev.specifications,
-          [specKey.trim()]: specValue.trim()
-        }
+          [specKey.trim()]: specValue.trim(),
+        },
       }));
-      setSpecKey('');
-      setSpecValue('');
+      setSpecKey("");
+      setSpecValue("");
     }
   };
 
   const removeSpecification = (key: string) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const newSpecs = { ...prev.specifications };
       delete newSpecs[key];
       return { ...prev, specifications: newSpecs };
@@ -106,7 +106,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         {/* Header */}
         <div className={styles.modalHeader}>
           <h2 className={styles.modalTitle}>
-            {isEdit ? 'Editar Producto' : 'Nuevo Producto'}
+            {isEdit ? "Editar Producto" : "Nuevo Producto"}
           </h2>
           <button
             onClick={onCancel}
@@ -123,13 +123,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             {/* Basic Information */}
             <div>
               <h3 className={styles.sectionTitle}>Información Básica</h3>
-              
+
               <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Nombre del Producto</label>
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className={`${styles.formInput} ${styles.formText}`}
                   placeholder="Ej: ASUS ROG Strix RTX 4090"
                 />
@@ -139,12 +141,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <label className={styles.formLabel}>Categoría</label>
                 <select
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
                   className={`${styles.formInput} ${styles.formSelect}`}
                 >
                   <option value="">Seleccionar categoría</option>
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -157,12 +163,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     min="0"
                     step="0.01"
                     value={formData.price}
-                    onChange={(e) => setFormData(
-                      { ...formData, 
-                        price: (e.target.value.charAt(0) === '0' && e.target.value.length > 1) ? 
-                        parseFloat(e.target.value) : 
-                        parseFloat(e.target.value) || 0 }
-                    )}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        price:
+                          e.target.value.charAt(0) === "0" &&
+                          e.target.value.length > 1
+                            ? parseFloat(e.target.value)
+                            : parseFloat(e.target.value) || 0,
+                      })
+                    }
                     className={styles.formInput}
                   />
                 </div>
@@ -173,12 +183,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     min="0"
                     step="0.01"
                     value={formData.originalPrice}
-                    onChange={(e) => setFormData(
-                      { ...formData, 
-                        originalPrice: (e.target.value.charAt(0) === '0' && 
-                        e.target.value.length > 1) ? 
-                        parseFloat(e.target.value) : 
-                        parseFloat(e.target.value) || 0 
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        originalPrice:
+                          e.target.value.charAt(0) === "0" &&
+                          e.target.value.length > 1
+                            ? parseFloat(e.target.value)
+                            : parseFloat(e.target.value) || 0,
                       })
                     }
                     className={styles.formInput}
@@ -193,7 +205,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     type="number"
                     min="0"
                     value={formData.stock}
-                    onChange={(e) => setFormData({ ...formData, stock: parseInt(e.target.value) || 0 })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        stock: parseInt(e.target.value) || 0,
+                      })
+                    }
                     className={styles.formInput}
                   />
                 </div>
@@ -205,7 +222,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     max="5"
                     step="0.1"
                     value={formData.rating}
-                    onChange={(e) => setFormData({ ...formData, rating: parseFloat(e.target.value) || 5 })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        rating: parseFloat(e.target.value) || 5,
+                      })
+                    }
                     className={styles.formInput}
                   />
                 </div>
@@ -218,7 +240,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     type="number"
                     min="0"
                     value={formData.reviews}
-                    onChange={(e) => setFormData({ ...formData, reviews: parseInt(e.target.value) || 0 })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        reviews: parseInt(e.target.value) || 0,
+                      })
+                    }
                     className={styles.formInput}
                   />
                 </div>
@@ -229,7 +256,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   <input
                     type="checkbox"
                     checked={formData.freeShipping}
-                    onChange={(e) => setFormData({ ...formData, freeShipping: e.target.checked })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        freeShipping: e.target.checked,
+                      })
+                    }
                     className={styles.checkboxInput}
                   />
                   <span className={styles.checkboxLabel}>Envío Gratis</span>
@@ -238,7 +270,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   <input
                     type="checkbox"
                     checked={formData.featured}
-                    onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, featured: e.target.checked })
+                    }
                     className={styles.checkboxInput}
                   />
                   <span className={styles.checkboxLabel}>Destacado</span>
@@ -249,13 +283,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             {/* Images and Details */}
             <div>
               <h3 className={styles.sectionTitle}>Imágenes y Detalles</h3>
-              
+
               <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Imagen Principal</label>
                 <input
                   type="url"
                   value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, image: e.target.value })
+                  }
                   className={styles.formInput}
                   placeholder="https://ejemplo.com/imagen.jpg"
                 />
@@ -266,7 +302,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <textarea
                   rows={4}
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                   className={styles.formInput}
                   placeholder="Descripción detallada del producto..."
                 />
@@ -277,7 +315,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           {/* Specifications */}
           <div className={styles.specificationsSection}>
             <h3 className={styles.sectionTitle}>Especificaciones Técnicas</h3>
-            
+
             <div className={styles.specForm}>
               <input
                 type="text"
@@ -303,20 +341,22 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             </div>
 
             <div className={styles.specList}>
-              {Object.entries(formData.specifications || {}).map(([key, value]) => (
-                <div key={key} className={styles.specItem}>
-                  <span className={styles.specText}>
-                    <span className={styles.specKey}>{key}:</span> {value}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => removeSpecification(key)}
-                    className={styles.removeSpecButton}
-                  >
-                    <FaTrash className={styles.removeSpecIcon} />
-                  </button>
-                </div>
-              ))}
+              {Object.entries(formData.specifications || {}).map(
+                ([key, value]) => (
+                  <div key={key} className={styles.specItem}>
+                    <span className={styles.specText}>
+                      <span className={styles.specKey}>{key}:</span> {value}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => removeSpecification(key)}
+                      className={styles.removeSpecButton}
+                    >
+                      <FaTrash className={styles.removeSpecIcon} />
+                    </button>
+                  </div>
+                )
+              )}
             </div>
           </div>
 
@@ -329,12 +369,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             >
               Cancelar
             </button>
-            <button
-              type="submit"
-              className={styles.submitButton}
-            >
+            <button type="submit" className={styles.submitButton}>
               <Save className={styles.submitIcon} />
-              {isEdit ? 'Actualizar' : 'Crear'} Producto
+              {isEdit ? "Actualizar" : "Crear"} Producto
             </button>
           </div>
         </form>

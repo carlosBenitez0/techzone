@@ -15,9 +15,10 @@ import { useProductsStore } from "../store";
 import styles from "./HomePage.module.css";
 import { CategoryCard, ProductCard } from "../components/ui";
 import { Footer, Navbar } from "../components/shared";
+import { useRouter } from "next/navigation";
 
 export const HomePage = () => {
-  
+  const router = useRouter();
   const { products } = useProductsStore();
 
   const categories = [
@@ -202,7 +203,7 @@ export const HomePage = () => {
             <div className={styles.productsGrid}>
               {products.slice(0, 8).map((product, index) => (
                 <div key={index} style={{ animationDelay: `${index * 0.1}s` }}>
-                  <ProductCard product={product} />
+                  <ProductCard product={product} onNavigate={(route: string) => router.push(route)} />
                 </div>
               ))}
             </div>
