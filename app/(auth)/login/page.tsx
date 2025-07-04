@@ -121,6 +121,9 @@ const page = () => {
             <div className={styles.demoMessage}>
               <strong>Demo:</strong> demo@gmail.com / demo123
             </div>
+            <div className={styles.demoMessage}>
+              <strong>Admin:</strong> admin@gmail.com / admin123
+            </div>
             <button
               type="submit"
               disabled={isLoading}
