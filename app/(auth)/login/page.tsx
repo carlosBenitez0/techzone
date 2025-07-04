@@ -15,7 +15,7 @@ import { useAuthStore } from "@/app/store";
 import { useRouter } from "next/navigation";
 import { User } from "@/app/store";
 
-export const Page = () => {
+const page = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<Omit<User, "id" | "name">>({
@@ -154,4 +154,4 @@ export const Page = () => {
     </div>
   );
 };
-export default Page;
+export default page;

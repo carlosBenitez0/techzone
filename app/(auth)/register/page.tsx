@@ -16,7 +16,7 @@ import { LogoTechZoneNoText } from "@/app/components/shared";
 import { useAuthStore } from "@/app/store/authStore";
 import { useRouter } from "next/navigation";
 
-export const Register = () => {
+const page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { isLoading, register, error } = useAuthStore();
@@ -29,15 +29,14 @@ export const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try{
+    try {
       const result = await register(formData);
-      if(result){
+      if (result) {
         router.push("/login");
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-    
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +142,9 @@ export const Register = () => {
               disabled={isLoading}
             >
               {isLoading ? (
-                <FaSpinner className={`${styles.spinner} ${styles.spinnerRotate}`} />
+                <FaSpinner
+                  className={`${styles.spinner} ${styles.spinnerRotate}`}
+                />
               ) : (
                 <>
                   Registrarse
@@ -170,4 +171,4 @@ export const Register = () => {
     </div>
   );
 };
-export default Register;
+export default page;
