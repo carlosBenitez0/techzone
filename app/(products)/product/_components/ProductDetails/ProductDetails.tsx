@@ -1,20 +1,22 @@
-import { useState } from 'react';
-import { 
-  FaArrowLeft, 
-} from 'react-icons/fa';
-import { 
-  MdCheck, 
-  MdChevronLeft, 
-  MdChevronRight, 
-  MdShoppingCart, 
-  MdShare, 
-  MdFavorite
-} from 'react-icons/md';
-import styles from './ProductDetails.module.css';
-import { StarRating } from '@/app/components/ui/StarRating/StarRating';
-import { ProductCard } from '@/app/components/ui/ProductCard/ProductCard';
-import { useProductsStore } from '@/app/store/productsStore';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { FaArrowLeft, FaCheckCircle } from "react-icons/fa";
+import {
+  MdCheck,
+  MdChevronLeft,
+  MdChevronRight,
+  MdShoppingCart,
+  MdShare,
+  MdFavorite,
+  MdOutlineShoppingCartCheckout,
+} from "react-icons/md";
+import { toast } from "react-hot-toast";
+import styles from "./ProductDetails.module.css";
+import { StarRating } from "@/app/components/ui/StarRating/StarRating";
+import { ProductCard } from "@/app/components/ui/ProductCard/ProductCard";
+import { useProductsStore } from "@/app/store/productsStore";
+import { useCartStore } from "@/app/store/cartStore";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/hooks/useAuth";
 
 interface ProductDetailProps {
   productId: string;
@@ -23,48 +25,103 @@ interface ProductDetailProps {
 const DEMO_REVIEWS = [
   {
     id: 1,
-    userName: 'Carlos M.',
+    userName: "Carlos M.",
     rating: 5,
-    comment: 'Excelente producto, superó mis expectativas. La calidad es impresionante.',
-    date: '2024-01-15'
+    comment:
+      "Excelente producto, superó mis expectativas. La calidad es impresionante.",
+    date: "2024-01-15",
   },
   {
     id: 2,
-    userName: 'Ana L.',
+    userName: "Ana L.",
     rating: 4,
-    comment: 'Muy buena compra, el rendimiento es fantástico. Recomendado.',
-    date: '2024-01-10'
+    comment: "Muy buena compra, el rendimiento es fantástico. Recomendado.",
+    date: "2024-01-10",
   },
   {
     id: 3,
-    userName: 'Miguel R.',
+    userName: "Miguel R.",
     rating: 5,
-    comment: 'Perfecto para gaming, corre todos los juegos en ultra sin problemas.',
-    date: '2024-01-08'
-  }
+    comment:
+      "Perfecto para gaming, corre todos los juegos en ultra sin problemas.",
+    date: "2024-01-08",
+  },
 ];
 
 export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
   const router = useRouter();
   const { products } = useProductsStore();
-  const [activeTab, setActiveTab] = useState('description');
-  // const [selectedImage, setSelectedImage] = useState(0);
+  const { addToCart } = useCartStore();
+  const { isAuthenticated } = useAuth();
+  const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
   const [relatedSlideIndex, setRelatedSlideIndex] = useState(0);
-  
-  const product = products.find(p => p.id === productId);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const product = products.find((p) => p.id === productId);
 
   const handleRouter = (route: string) => {
     router.push(route);
-  }
-  
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    // Si el usuario no está autenticado, redirigir al login
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
+
+    setIsAddingToCart(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      addToCart(
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+        },
+        quantity // Usar la cantidad seleccionada
+      );
+
+      toast.success(
+        <div className="flex items-center gap-2">
+          <FaCheckCircle className="text-green-500" />
+          <span>
+            {quantity > 1
+              ? `¡${quantity} productos agregados al carrito!`
+              : "¡Producto agregado al carrito!"}
+          </span>
+        </div>,
+        {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "#fff",
+            color: "#1f2937",
+            border: "1px solid #e5e7eb",
+            padding: "0.75rem 1rem",
+            borderRadius: "0.5rem",
+            boxShadow:
+              "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+          },
+        }
+      );
+
+      setIsAddingToCart(false);
+    }, 500);
+  };
+
   if (!product) {
     return (
       <div className={styles.notFoundContainer}>
         <div className={styles.notFoundContent}>
           <h2 className={styles.notFoundTitle}>Producto no encontrado</h2>
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push("/")}
             className={styles.notFoundButton}
           >
             Volver al inicio
@@ -74,24 +131,24 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
     );
   }
 
-  const relatedProducts = products.filter(p => 
-    p.category === product.category && p.id !== product.id
-  ).slice(0, 6);
+  const relatedProducts = products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 6);
 
   const tabs = [
-    { id: 'description', name: 'Descripción' },
-    { id: 'specifications', name: 'Especificaciones' },
-    { id: 'reviews', name: 'Reseñas' }
+    { id: "description", name: "Descripción" },
+    { id: "specifications", name: "Especificaciones" },
+    { id: "reviews", name: "Reseñas" },
   ];
 
   const nextRelatedSlide = () => {
-    setRelatedSlideIndex((prev) => 
+    setRelatedSlideIndex((prev) =>
       prev + 3 >= relatedProducts.length ? 0 : prev + 3
     );
   };
 
   const prevRelatedSlide = () => {
-    setRelatedSlideIndex((prev) => 
+    setRelatedSlideIndex((prev) =>
       prev - 3 < 0 ? Math.max(0, relatedProducts.length - 3) : prev - 3
     );
   };
@@ -100,10 +157,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
     <div className={styles.container}>
       <div className={styles.innerContainer}>
         {/* Breadcrumb */}
-        <button
-          onClick={() => handleRouter('/')}
-          className={styles.backButton}
-        >
+        <button onClick={() => handleRouter("/")} className={styles.backButton}>
           <FaArrowLeft className={styles.backIcon} />
           Volver a productos
         </button>
@@ -124,16 +178,13 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
           <div className={styles.infoSection}>
             {/* Header Info */}
             <div className={styles.header}>
-              <span className={styles.categoryBadge}>
-                {product.category}
-              </span>
-              <h1 className={styles.productTitle}>
-                {product.name}
-              </h1>
+              <span className={styles.categoryBadge}>{product.category}</span>
+              <h1 className={styles.productTitle}>{product.name}</h1>
               <div className={styles.ratingContainer}>
                 <StarRating rating={product.rating} size="lg" />
-                <span className={styles.reviewCount}>({product.reviews} reseñas)</span>
-                
+                <span className={styles.reviewCount}>
+                  ({product.reviews} reseñas)
+                </span>
               </div>
             </div>
 
@@ -150,15 +201,21 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                 </span>
                 {product.originalPrice && (
                   <span className={styles.discountBadge}>
-                    -{Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
+                    -
+                    {Math.round(
+                      (1 - product.price / product.originalPrice) * 100
+                    )}
+                    % OFF
                   </span>
                 )}
               </div>
-              
+
               {product.freeShipping && (
                 <div className={styles.freeShipping}>
                   <MdCheck className={styles.checkIcon} />
-                  <span className={styles.freeShippingText}>Envío gratis incluido</span>
+                  <span className={styles.freeShippingText}>
+                    Envío gratis incluido
+                  </span>
                 </div>
               )}
 
@@ -166,11 +223,18 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
               <div className={styles.stockContainer}>
                 <div>
                   <span className={styles.stockLabel}>Disponibilidad:</span>
-                  <p className={`${styles.stockStatus} ${
-                    product.stock > 10 ? styles.inStock : 
-                    product.stock > 0 ? styles.lowStock : styles.outOfStock
-                  }`}>
-                    {product.stock > 0 ? `${product.stock} en stock` : 'Agotado'}
+                  <p
+                    className={`${styles.stockStatus} ${
+                      product.stock > 10
+                        ? styles.inStock
+                        : product.stock > 0
+                        ? styles.lowStock
+                        : styles.outOfStock
+                    }`}
+                  >
+                    {product.stock > 0
+                      ? `${product.stock} en stock`
+                      : "Agotado"}
                   </p>
                 </div>
                 <div className={styles.warranty}>
@@ -194,7 +258,9 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                     </button>
                     <span className={styles.quantityValue}>{quantity}</span>
                     <button
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                      onClick={() =>
+                        setQuantity(Math.min(product.stock, quantity + 1))
+                      }
                       className={styles.quantityButton}
                     >
                       +
@@ -204,9 +270,41 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
               </div>
 
               <div className={styles.actionButtons}>
-                <button className={styles.addToCartButton}>
-                  <MdShoppingCart className={styles.cartIcon} />
-                  Agregar al Carrito
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isAddingToCart || product.stock === 0}
+                  className={`${styles.addToCartButton} ${
+                    isAddingToCart ? styles.addingToCart : ""
+                  }`}
+                >
+                  {isAddingToCart ? (
+                    <>
+                      <span className={styles.spinner}></span>
+                      Agregando...
+                    </>
+                  ) : (
+                    <>
+                      <MdShoppingCart className={styles.cartIcon} />
+                      {product.stock > 0 ? "Agregar al Carrito" : "Sin Stock"}
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      router.push("/login");
+                      return;
+                    }
+                    handleAddToCart();
+                    if (product.stock > 0) {
+                      router.push("/cart");
+                    }
+                  }}
+                  disabled={isAddingToCart || product.stock === 0}
+                  className={styles.buyNowButton}
+                >
+                  <MdOutlineShoppingCartCheckout className={styles.cartIcon} />
+                  Comprar Ahora
                 </button>
                 <button className={styles.secondaryButton}>
                   <MdFavorite className={styles.secondaryIcon} />
@@ -246,7 +344,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`${styles.tabButton} ${
-                      activeTab === tab.id ? styles.activeTab : ''
+                      activeTab === tab.id ? styles.activeTab : ""
                     }`}
                   >
                     {tab.name}
@@ -260,28 +358,32 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
 
             {/* Tab Content */}
             <div className={styles.tabContent}>
-              {activeTab === 'description' && (
+              {activeTab === "description" && (
                 <div className={styles.descriptionContent}>
                   <h3 className={styles.tabTitle}>Descripción del Producto</h3>
-                  <p className={styles.descriptionText}>{product.description}</p>
+                  <p className={styles.descriptionText}>
+                    {product.description}
+                  </p>
                 </div>
               )}
 
-              {activeTab === 'specifications' && (
+              {activeTab === "specifications" && (
                 <div>
                   <h3 className={styles.tabTitle}>Especificaciones Técnicas</h3>
                   <div className={styles.specsGrid}>
-                    {Object.entries(product?.specifications || {}).map(([key, value]) => (
-                      <div key={key} className={styles.specItem}>
-                        <span className={styles.specKey}>{key}:</span>
-                        <span className={styles.specValue}>{value}</span>
-                      </div>
-                    ))}
+                    {Object.entries(product?.specifications || {}).map(
+                      ([key, value]) => (
+                        <div key={key} className={styles.specItem}>
+                          <span className={styles.specKey}>{key}:</span>
+                          <span className={styles.specValue}>{value}</span>
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
               )}
 
-              {activeTab === 'reviews' && (
+              {activeTab === "reviews" && (
                 <div>
                   <h3 className={styles.tabTitle}>Reseñas de Usuarios</h3>
                   <div className={styles.reviewsList}>
@@ -289,8 +391,14 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                       <div key={review.id} className={styles.reviewItem}>
                         <div className={styles.reviewHeader}>
                           <div>
-                            <h4 className={styles.reviewAuthor}>{review.userName}</h4>
-                            <StarRating rating={review.rating} size="sm" showNumber={false} />
+                            <h4 className={styles.reviewAuthor}>
+                              {review.userName}
+                            </h4>
+                            <StarRating
+                              rating={review.rating}
+                              size="sm"
+                              showNumber={false}
+                            />
                           </div>
                           <span className={styles.reviewDate}>
                             {new Date(review.date).toLocaleDateString()}
@@ -312,9 +420,11 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
             <div className={styles.relatedHeader}>
               <div>
                 <h3 className={styles.relatedTitle}>Productos Relacionados</h3>
-                <p className={styles.relatedSubtitle}>Otros productos de {product.category}</p>
+                <p className={styles.relatedSubtitle}>
+                  Otros productos de {product.category}
+                </p>
               </div>
-              
+
               {relatedProducts.length > 3 && (
                 <div className={styles.sliderControls}>
                   <button
@@ -332,34 +442,40 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
                 </div>
               )}
             </div>
-            
+
             <div className={styles.relatedContent}>
               <div className={styles.relatedGrid}>
-                {relatedProducts.slice(relatedSlideIndex, relatedSlideIndex + 3).map((relatedProduct, index) => (
-                  <div 
-                    key={relatedProduct.id} 
-                    className={styles.relatedItem}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <ProductCard
-                      product={relatedProduct}
-                      onNavigate={() => handleRouter(`product/${relatedProduct.id}`)}
-                    />
-                  </div>
-                ))}
+                {relatedProducts
+                  .slice(relatedSlideIndex, relatedSlideIndex + 3)
+                  .map((relatedProduct, index) => (
+                    <div
+                      key={relatedProduct.id}
+                      className={styles.relatedItem}
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <ProductCard
+                        product={relatedProduct}
+                        onNavigate={() =>
+                          handleRouter(`product/${relatedProduct.id}`)
+                        }
+                      />
+                    </div>
+                  ))}
               </div>
-              
+
               {relatedProducts.length > 3 && (
                 <div className={styles.pagination}>
                   {/* 8 / 3 = 2.666... -> Math.ceil(2.666) = 3 (necesitas 3 grupos: [0-2], [3-5], [6-7]). */}
-                  {Array.from({ length: Math.ceil(relatedProducts.length / 3) }).map((_, index) => (
+                  {Array.from({
+                    length: Math.ceil(relatedProducts.length / 3),
+                  }).map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setRelatedSlideIndex(index * 3)}
                       className={`${styles.paginationDot} ${
                         Math.floor(relatedSlideIndex / 3) === index
                           ? styles.activeDot
-                          : ''
+                          : ""
                       }`}
                     />
                   ))}

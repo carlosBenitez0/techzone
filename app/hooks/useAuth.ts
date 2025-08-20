@@ -17,52 +17,54 @@ export const useAuth = () => {
     password: "",
   });
   const [registeredUsers, setRegisteredUsers] = useState<User[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-  const [isAdmin, setIsAdmin] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // Cargar estado inicial de localStorage
   useEffect(() => {
-    const savedUserData = localStorage.getItem('userData');
-    const savedRegisteredUsers = localStorage.getItem('registeredUsers');
-    const savedIsAuthenticated = localStorage.getItem('isAuthenticated');
-    const savedIsAdmin = localStorage.getItem('isAdmin');
+    const savedUserData = localStorage.getItem("userData");
+    const savedRegisteredUsers = localStorage.getItem("registeredUsers");
+    const savedIsAuthenticated = localStorage.getItem("isAuthenticated");
+    const savedIsAdmin = localStorage.getItem("isAdmin");
 
     if (savedUserData) setUserData(JSON.parse(savedUserData));
-    if (savedRegisteredUsers) setRegisteredUsers(JSON.parse(savedRegisteredUsers));
-    if (savedIsAuthenticated) setIsAuthenticated(savedIsAuthenticated === 'true');
-    if (savedIsAdmin) setIsAdmin(savedIsAdmin === 'true');
+    if (savedRegisteredUsers)
+      setRegisteredUsers(JSON.parse(savedRegisteredUsers));
+    if (savedIsAuthenticated)
+      setIsAuthenticated(savedIsAuthenticated === "true");
+    if (savedIsAdmin) setIsAdmin(savedIsAdmin === "true");
   }, []);
 
   // Guardar cambios en localStorage
   useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
   useEffect(() => {
-    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+    localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
   }, [registeredUsers]);
 
   useEffect(() => {
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+    localStorage.setItem("isAuthenticated", isAuthenticated.toString());
     // Actualizar el estado de autenticación en el localStorage cuando cambie
     if (isAuthenticated) {
-      localStorage.setItem('userData', JSON.stringify(userData));
+      localStorage.setItem("userData", JSON.stringify(userData));
     } else {
-      localStorage.removeItem('userData');
+      localStorage.removeItem("userData");
     }
   }, [isAuthenticated, userData]);
 
   useEffect(() => {
-    localStorage.setItem('isAdmin', isAdmin.toString());
+    localStorage.setItem("isAdmin", isAdmin.toString());
   }, [isAdmin]);
 
   const register = async (user: User) => {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const newUser = { ...user, id: Date.now() };
       setRegisteredUsers((prev) => [...prev, newUser]);
       setUserData(newUser);

@@ -1,51 +1,51 @@
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 2rem;
-  padding: 2rem;
-  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    background-color: white;
 }
 
 @media (max-width: 768px) {
-  .navbar {
-    padding: 1.5rem 1rem;
-  }
+    .navbar {
+        padding: 1.5rem 1rem;
+    }
 }
 
 .navbarContent {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .login,
 .register {
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-  min-width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    min-width: fit-content;
 }
 
 .login {
-  padding: 0rem;
+    padding: 0rem;
 }
 
 .login:hover {
-  color: var(--primary-600);
+    color: var(--primary-600);
 }
 
 .register {
-  background-color: var(--primary-600);
-  border-radius: 50px;
-  color: #fff;
+    background-color: var(--primary-600);
+    border-radius: 50px;
+    color: #fff;
 }
 
 .register:hover {
-  background-color: var(--primary-500);
+    background-color: var(--primary-500);
 }
 
 /* 
@@ -55,140 +55,194 @@
  */
 
 .nav {
-  display: flex;
-  gap: 2rem;
+    display: flex;
+    gap: 2rem;
 }
 
 .bgMenu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.292);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.292);
 }
 
 .bgMenuClosed {
-  display: none;
+    display: none;
 }
 
 .noScroll {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
 }
 
-.navIconContainer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  border-radius: 100%;
-  background-color: var(--primary-600);
-  scale: 1 ;
-  transition: background-color 0.2s ease, scale 0.2s ease;
+.navIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 100%;
+    background-color: var(--primary-600);
+    scale: 1;
+    transition: background-color 0.2s ease, scale 0.2s ease;
 }
 
 .navIconContainer:hover {
-  cursor: pointer;
-  background-color: var(--primary-500);
-  scale: 1.04 ;
+    cursor: pointer;
+    background-color: var(--primary-500);
+    scale: 1.04;
 }
 
 .navIconContainer:hover .navIcon {
-  color: var(--primary-100);
+    color: var(--primary-100);
 }
 
 .navIcon {
-  font-size: 2rem;
-  color: var(--primary-100);
+    font-size: 2rem;
+    color: var(--primary-100);
 }
 
 .navLink {
-  position: relative;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.6rem;
-  transition: color 0.2s ease;
+    position: relative;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.6rem;
+    transition: color 0.2s ease;
 }
 
 .navLink:hover {
-  color: rgb(1, 71, 109);
+    color: rgb(1, 71, 109);
 }
 
 .linkActive {
-  color: rgb(1, 71, 109);
+    color: rgb(1, 71, 109);
 }
 
 .menuButton {
-  display: none;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1001;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
 }
 
 .menuButton span {
-  width: 2rem;
-  height: 0.21rem;
-  background: rgb(1, 71, 109);
-  border-radius: 10px;
-  transition: all 0.3s linear;
-  position: relative;
-  transform-origin: 1px;
+    width: 2rem;
+    height: 0.21rem;
+    background: rgb(1, 71, 109);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
 }
 
 @media (max-width: 768px) {
-  .menuButton {
-    display: flex;
-  }
+    .menuButton {
+        display: flex;
+    }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 70%;
-    max-width: 300px;
-    background: white;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
-  }
+    .nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
 
-  .navOpen {
-    transform: translateX(0);
-  }
+    .navOpen {
+        transform: translateX(0);
+    }
 
-  .open span:first-child {
-    transform: rotate(45deg);
-  }
+    .open span:first-child {
+        transform: rotate(45deg);
+    }
 
-  .open span:nth-child(2) {
-    opacity: 0;
-  }
+    .open span:nth-child(2) {
+        opacity: 0;
+    }
 
-  .open span:last-child {
-    transform: rotate(-45deg);
-  }
+    .open span:last-child {
+        transform: rotate(-45deg);
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .nav {
-    gap: 1.5rem;
-  }
+    .nav {
+        gap: 1.5rem;
+    }
 
-  .navLink {
-    font-size: 1rem;
-  }
+    .navLink {
+        font-size: 1rem;
+    }
+}
+
+/* Navigation Icons Container */
+.navIcons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Cart Icon Styles */
+.cartIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--primary-600);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    color: white;
+}
+
+.cartIcon:hover {
+    background-color: var(--primary-500);
+    transform: scale(1.05);
+}
+
+.cartBadge {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 9999px;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .navIcons {
+        margin-left: auto;
+        padding-right: 1rem;
+    }
+
+    .navLink {
+        padding: 0.5rem 1rem;
+    }
 }

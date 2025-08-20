@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/app/store";
 import { FaRegUser } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
-
+import { CartIcon } from "../Icons/CartIcon";
 
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
@@ -53,10 +53,8 @@ export const Navbar = () => {
           <LogoTechZone />
         </div>
 
-        {/* <GlobalSearch /> */}
         <div className={menuOpen ? styles.bgMenu : styles.bgMenuClosed}></div>
 
-        {/* Hamburguer Button */}
         <button
           className={`${styles.menuButton} ${menuOpen ? styles.open : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -66,30 +64,53 @@ export const Navbar = () => {
           <span></span>
           <span></span>
         </button>
-        {/* Menú de navegación */}
 
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-          <Link href="/" className={styles.navLink}>
+          <Link
+            href="/"
+            className={styles.navLink}
+            onClick={() => setMenuOpen(false)}
+          >
             Inicio
           </Link>
-          {isAuthenticated === true && userData.roll === 'user' ? (
-            <Link href="/profile" className={styles.navLink}>
-              <div className={styles.navIconContainer}>
-                <FaRegUser className={styles.navIcon} />
-              </div>
-            </Link>
-          ) : isAuthenticated === true && userData.roll === 'admin' ? (
-            <Link href="/admin" className={styles.navLink}>
+
+          {isAuthenticated === true && userData.roll === "user" ? (
+            <div className={styles.navIcons}>
+              <CartIcon />
+              <Link
+                href="/profile"
+                className={styles.navLink}
+                onClick={() => setMenuOpen(false)}
+              >
+                <div className={styles.navIconContainer}>
+                  <FaRegUser className={styles.navIcon} />
+                </div>
+              </Link>
+            </div>
+          ) : isAuthenticated === true && userData.roll === "admin" ? (
+            <Link
+              href="/admin"
+              className={styles.navLink}
+              onClick={() => setMenuOpen(false)}
+            >
               <div className={styles.navIconContainer}>
                 <IoSettingsOutline className={styles.navIcon} />
               </div>
             </Link>
           ) : (
             <>
-              <Link href={"/login"} className={styles.login}>
+              <Link
+                href={"/login"}
+                className={styles.login}
+                onClick={() => setMenuOpen(false)}
+              >
                 Iniciar sesión
               </Link>
-              <Link href={"/register"} className={styles.register}>
+              <Link
+                href={"/register"}
+                className={styles.register}
+                onClick={() => setMenuOpen(false)}
+              >
                 Registrarse
               </Link>
             </>
@@ -97,41 +118,46 @@ export const Navbar = () => {
         </nav>
       </div>
     );
-  } else {
-    return (
-      <div className={styles.navbar}>
-        <div className={styles.navbarContent}>
-          <LogoTechZone />
-        </div>
-        <GlobalSearch />
-        <div className={styles.navbarContent}>
-          <ExploreDropdown />
-          {isAuthenticated === true && userData.roll === 'user' ? (
-            <>
+  }
+
+  // Desktop view
+  return (
+    <div className={styles.navbar}>
+      <div className={styles.navbarContent}>
+        <LogoTechZone />
+      </div>
+
+      <GlobalSearch />
+
+      <div className={styles.navbarContent}>
+        <ExploreDropdown />
+
+        {isAuthenticated === true && userData.roll === "user" ? (
+          <div className={styles.navIcons}>
+            <CartIcon />
             <Link href="/profile" className={styles.navLink}>
               <div className={styles.navIconContainer}>
                 <FaRegUser className={styles.navIcon} />
               </div>
             </Link>
-          </>
-          ) : isAuthenticated === true && userData.roll === 'admin' ? (
-            <Link href="/admin" className={styles.navLink}>
-              <div className={styles.navIconContainer}>
-                <IoSettingsOutline className={styles.navIcon} />
-              </div>
+          </div>
+        ) : isAuthenticated === true && userData.roll === "admin" ? (
+          <Link href="/admin" className={styles.navLink}>
+            <div className={styles.navIconContainer}>
+              <IoSettingsOutline className={styles.navIcon} />
+            </div>
+          </Link>
+        ) : (
+          <>
+            <Link href={"/login"} className={styles.login}>
+              Iniciar sesión
             </Link>
-          ) : (
-            <>
-              <Link href={"/login"} className={styles.login}>
-                Iniciar sesión
-              </Link>
-              <Link href={"/register"} className={styles.register}>
-                Registrarse
-              </Link>
-            </>
-          )}
-        </div>
+            <Link href={"/register"} className={styles.register}>
+              Registrarse
+            </Link>
+          </>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 };
