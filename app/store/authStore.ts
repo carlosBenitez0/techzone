@@ -34,12 +34,12 @@ interface AuthStore {
 export const useAuthStore = create<AuthStore>((set, get) => ({
   userData: {
     id: 0,
-    name: "",
-    email: "",
-    password: "",
+    name: "demo",
+    email: "demo@gmail.com",
+    password: "demo123",
     address: "",
     phone: "",
-    roll: "",
+    roll: "user",
   },
   registeredUsers: [
     {
@@ -57,7 +57,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       roll: "admin",
     },
   ],
-  isAuthenticated: false,
+  isAuthenticated: true,
   isLoading: false,
   error: null,
   //setters

@@ -4,7 +4,7 @@ import { FaShoppingCart, FaBolt, FaPlus, FaSignInAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useCartStore } from "@/app/store/cartStore";
 import { Product } from "@/types/products";
-import { useAuth } from "@/app/hooks/useAuth";
+import { useAuthStore } from "@/app/store";
 import { useRouter } from "next/navigation";
 
 import styles from "./ProductCard.module.css";
@@ -19,7 +19,7 @@ export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const { addToCart } = useCartStore();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthStore();
   const router = useRouter();
 
   const discountPercentage = product.originalPrice
@@ -30,7 +30,12 @@ export const ProductCard = ({ product, onNavigate }: ProductCardProps) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (product.stock <= 0 || !isAuthenticated) return;
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
+
+    if (product.stock <= 0) return;
 
     setIsAdding(true);
 

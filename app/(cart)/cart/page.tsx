@@ -1,5 +1,5 @@
 "use client";
-import { useCartStore } from "@/app/store";
+import { useAuthStore, useCartStore } from "@/app/store";
 import { FaMinus, FaPlus, FaTrash, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,6 +20,7 @@ export default function CartPage() {
   } = useCartStore();
   const [isMounted, setIsMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { isAuthenticated } = useAuthStore();
 
   // Prevent hydration mismatch
   useEffect(() => {
@@ -33,8 +34,15 @@ export default function CartPage() {
   };
 
   const handleCheckout = () => {
-    // Add checkout logic here
-    router.push("/checkout");
+    if (items.length === 0) return;
+
+    if (!isAuthenticated) {
+      // Redirect to login with a return URL
+      router.push(`/`);
+    } else {
+      // Proceed to checkout
+      router.push("/checkout");
+    }
   };
 
   if (!isMounted) {
@@ -110,24 +118,55 @@ export default function CartPage() {
             {items.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <div className={styles.cartItemContent}>
-                  <Link
-                    href={`/product/${item.id}`}
-                    className={styles.productImageContainer}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {item.image && (
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className={styles.productImage}
-                        sizes="(max-width: 640px) 100vw, 200px"
-                      />
-                    )}
-                  </Link>
-                  <div className={styles.productInfo}>
-                    <div className={styles.productHeader}>
+                  <div className={styles.productContent}>
+                    <Link
+                      href={`/product/${item.id}`}
+                      className={styles.productImageContainer}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {item.image && (
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className={styles.productImage}
+                          sizes="(max-width: 640px) 100vw, 200px"
+                        />
+                      )}
+                    </Link>
+                    <div className={styles.productInfo}>
                       <h3 className={styles.productName}>{item.name}</h3>
+                      <p className={styles.productPrice}>
+                        ${item.price.toFixed(2)}
+                      </p>
+                      <div className={styles.quantityControls}>
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity - 1)
+                          }
+                          className={styles.quantityButton}
+                          disabled={item.quantity <= 1}
+                          aria-label="Reducir cantidad"
+                        >
+                          <FaMinus />
+                        </button>
+                        <span className={styles.quantityDisplay}>
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity + 1)
+                          }
+                          className={styles.quantityButton}
+                          aria-label="Aumentar cantidad"
+                        >
+                          <FaPlus />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className={styles.productFooter}>
                       <button
                         onClick={() => removeFromCart(item.id)}
                         className={styles.removeButton}
@@ -135,33 +174,7 @@ export default function CartPage() {
                       >
                         <FaTrash size={16} />
                       </button>
-                    </div>
-                    <p className={styles.productPrice}>
-                      ${item.price.toFixed(2)}
-                    </p>
-                    <div className={styles.quantityControls}>
-                      <button
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity - 1)
-                        }
-                        className={styles.quantityButton}
-                        disabled={item.quantity <= 1}
-                        aria-label="Reducir cantidad"
-                      >
-                        <FaMinus />
-                      </button>
-                      <span className={styles.quantityDisplay}>
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
-                        }
-                        className={styles.quantityButton}
-                        aria-label="Aumentar cantidad"
-                      >
-                        <FaPlus />
-                      </button>
+
                       <div className={styles.subtotalContainer}>
                         <p className={styles.subtotalLabel}>Subtotal</p>
                         <p className={styles.subtotalAmount}>

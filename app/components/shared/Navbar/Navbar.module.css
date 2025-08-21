@@ -104,6 +104,26 @@
     color: var(--primary-100);
 }
 
+.cartIconContainer {
+    background-color: transparent !important;
+    transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.cartIconContainer:hover {
+    background-color: transparent !important;
+    transform: translateY(-3px) !important;
+    scale: 1 !important;
+}
+
+.cartIconContainer .navIcon {
+    color: var(--gray-700) !important;
+    font-size: 2.4rem !important;
+}
+
+.cartIconContainer:hover .navIcon {
+    color: var(--primary-600) !important;
+}
+
 .navLink {
     position: relative;
     text-decoration: none;
@@ -208,14 +228,15 @@
     justify-content: center;
     padding: 0.75rem;
     border-radius: 50%;
-    background-color: var(--primary-600);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    color: white;
+    background-color: transparent;
+    transition: transform 0.2s ease;
+    color: var(--gray-700);
+    font-size: 2rem;
 }
 
 .cartIcon:hover {
-    background-color: var(--primary-500);
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    color: var(--primary-600);
 }
 
 .cartBadge {

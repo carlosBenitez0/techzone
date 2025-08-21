@@ -16,7 +16,7 @@ import { ProductCard } from "@/app/components/ui/ProductCard/ProductCard";
 import { useProductsStore } from "@/app/store/productsStore";
 import { useCartStore } from "@/app/store/cartStore";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/hooks/useAuth";
+import { useAuthStore } from "@/app/store";
 
 interface ProductDetailProps {
   productId: string;
@@ -52,7 +52,7 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({ productId }) => {
   const router = useRouter();
   const { products } = useProductsStore();
   const { addToCart } = useCartStore();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthStore();
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
   const [relatedSlideIndex, setRelatedSlideIndex] = useState(0);
