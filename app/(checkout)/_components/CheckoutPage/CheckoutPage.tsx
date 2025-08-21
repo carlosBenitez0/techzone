@@ -30,6 +30,10 @@ const CheckoutPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [orderNumber, setOrderNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
+  const [orderItems, setOrderItems] = useState(items);
+  const [orderTotalAmount, setOrderTotalAmount] = useState(getCartTotal());
+  const [orderShippingCost, setOrderShippingCost] = useState(0);
+  const [orderOrderTotal, setOrderOrderTotal] = useState(getCartTotal());
 
   const [formData, setFormData] = useState<FormData>({
     fullName: userData?.name || "",
@@ -108,6 +112,12 @@ const CheckoutPage = () => {
       setIsLoading(true);
       setError(null);
 
+      // Save order details before clearing cart
+      setOrderItems([...items]);
+      setOrderTotalAmount(getCartTotal());
+      setOrderShippingCost(0);
+      setOrderOrderTotal(getCartTotal());
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -129,9 +139,17 @@ const CheckoutPage = () => {
   };
 
   const totalAmount = getCartTotal();
-  const shippingCost = 10.0;
-  const tax = totalAmount * 0.15;
-  const orderTotal = totalAmount + shippingCost + tax;
+  const shippingCost = 0;
+  const orderTotal = totalAmount + shippingCost;
+
+  // Handle back navigation
+  const handleBack = () => {
+    if (currentStep === 1) {
+      router.push("/cart");
+    } else {
+      setCurrentStep((prevStep) => prevStep - 1);
+    }
+  };
 
   // Render methods would go here...
   // (renderStepIndicator, renderOrderSummary, renderStepContent)
@@ -206,7 +224,7 @@ const CheckoutPage = () => {
                 />
               </div>
 
-              <div className={styles.formGroup} data-small-width>
+              <div className={styles.formGroup} data-half-width>
                 <label htmlFor="postalCode">Código postal</label>
                 <input
                   id="postalCode"
@@ -249,10 +267,15 @@ const CheckoutPage = () => {
               </div>
 
               <div className={styles.formActions}>
-                <Link href="/cart" className={styles.backToCart}>
-                  <FaArrowLeft size={16} />
-                  <span>Volver al carrito</span>
-                </Link>
+                <button
+                  type="button"
+                  className={`${styles.button} ${styles.secondaryButton}`}
+                  onClick={handleBack}
+                  disabled={isLoading}
+                >
+                  <FaArrowLeft size={16} className={styles.buttonIcon} />
+                  <span>Volver</span>
+                </button>
                 <button
                   type="submit"
                   className={`${styles.button} ${styles.primaryButton}`}
@@ -294,12 +317,15 @@ const CheckoutPage = () => {
                   )}
                 </div>
               ))}
-              <div className={styles.formActions}>
+              <div className={`${styles.formActions} ${styles.step2}`}>
                 <button
                   type="button"
                   className={`${styles.button} ${styles.secondaryButton}`}
-                  onClick={() => setCurrentStep(1)}
+                  onClick={handleBack}
                   disabled={isLoading}
+                  style={{
+                    gap: "10px",
+                  }}
                 >
                   <FaArrowLeft size={16} className={styles.buttonIcon} />
                   <span>Volver</span>
@@ -308,6 +334,9 @@ const CheckoutPage = () => {
                   type="submit"
                   className={`${styles.button} ${styles.primaryButton}`}
                   disabled={!paymentMethod || isLoading}
+                  style={{
+                    gap: "10px",
+                  }}
                 >
                   <span>{isLoading ? "Procesando..." : "Pagar ahora"}</span>
                   <FaCreditCard size={16} className={styles.buttonIcon} />
@@ -333,15 +362,9 @@ const CheckoutPage = () => {
               <div className={styles.actions}>
                 <Link
                   href="/"
-                  className={`${styles.button} ${styles.secondaryButton}`}
-                >
-                  Seguir comprando
-                </Link>
-                <Link
-                  href="/orders"
                   className={`${styles.button} ${styles.primaryButton}`}
                 >
-                  Ver mis pedidos
+                  Seguir comprando
                 </Link>
               </div>
             </div>
@@ -352,7 +375,7 @@ const CheckoutPage = () => {
           <div className={styles.orderSummary}>
             <h3>Resumen del Pedido</h3>
             <div className={styles.summaryItems}>
-              {items.map((item) => (
+              {(currentStep === 3 ? orderItems : items).map((item) => (
                 <div key={item.id} className={styles.summaryItem}>
                   <div className={styles.itemImage}>
                     <img src={item.image} alt={item.name} />
@@ -371,19 +394,25 @@ const CheckoutPage = () => {
             <div className={styles.summaryTotals}>
               <div className={styles.summaryRow}>
                 <span>Subtotal</span>
-                <span>${totalAmount.toFixed(2)}</span>
+                <span>
+                  $
+                  {(currentStep === 3 ? orderTotalAmount : totalAmount).toFixed(
+                    2
+                  )}
+                </span>
               </div>
               <div className={styles.summaryRow}>
                 <span>Envío</span>
-                <span>${shippingCost.toFixed(2)}</span>
-              </div>
-              <div className={styles.summaryRow}>
-                <span>Impuestos (15%)</span>
-                <span>${tax.toFixed(2)}</span>
+                <span>Envío gratuito</span>
               </div>
               <div className={`${styles.summaryRow} ${styles.total}`}>
                 <span>Total</span>
-                <span>${orderTotal.toFixed(2)}</span>
+                <span>
+                  $
+                  {(currentStep === 3 ? orderOrderTotal : orderTotal).toFixed(
+                    2
+                  )}
+                </span>
               </div>
             </div>
           </div>
