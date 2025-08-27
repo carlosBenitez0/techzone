@@ -1,15 +1,15 @@
 .logoContainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .logoIcon {
-  background: var(--tech-gradient);
-  padding: 1rem;
-  border-radius: 0.75rem;
+    background: var(--tech-gradient);
+    padding: 1rem;
+    border-radius: 0.75rem;
 }
 
 .logoImage {
-  color: white;
+    color: white;
 }

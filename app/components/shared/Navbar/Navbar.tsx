@@ -11,12 +11,14 @@ import { useAuthStore } from "@/app/store";
 import { FaRegUser } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CartIcon } from "../Icons/CartIcon";
+import { useUserStore } from "@/app/store/userStore";
 
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const { isAuthenticated, userData } = useAuthStore();
-  console.log(isAuthenticated, userData.roll);
+  const { isAuthenticated } = useAuthStore();
+  const { user } = useAuthStore();
+  console.log(isAuthenticated, user?.roleName);
 
   // Verificar si es mobile o desktop
   useEffect(() => {
@@ -74,7 +76,7 @@ export const Navbar = () => {
             Inicio
           </Link>
 
-          {isAuthenticated === true && userData.roll === "user" ? (
+          {isAuthenticated === true && user?.roleName === "User" ? (
             <div className={styles.navIcons}>
               <CartIcon />
               <Link
@@ -87,7 +89,7 @@ export const Navbar = () => {
                 </div>
               </Link>
             </div>
-          ) : isAuthenticated === true && userData.roll === "admin" ? (
+          ) : isAuthenticated === true && user?.roleName === "Admin" ? (
             <Link
               href="/admin"
               className={styles.navLink}
@@ -132,7 +134,7 @@ export const Navbar = () => {
       <div className={styles.navbarContent}>
         <ExploreDropdown />
 
-        {isAuthenticated === true && userData.roll === "user" ? (
+        {isAuthenticated === true && user?.roleName === "User" ? (
           <div className={styles.navIcons}>
             <CartIcon />
             <Link href="/profile" className={styles.navLink}>
@@ -141,7 +143,7 @@ export const Navbar = () => {
               </div>
             </Link>
           </div>
-        ) : isAuthenticated === true && userData.roll === "admin" ? (
+        ) : isAuthenticated === true && user?.roleName === "Admin" ? (
           <Link href="/admin" className={styles.navLink}>
             <div className={styles.navIconContainer}>
               <IoSettingsOutline className={styles.navIcon} />

@@ -36,12 +36,12 @@ const CheckoutPage = () => {
   const [orderOrderTotal, setOrderOrderTotal] = useState(getCartTotal());
 
   const [formData, setFormData] = useState<FormData>({
-    fullName: userData?.name || "",
+    fullName: "Carlos",
     address: userData?.address || "",
     city: "",
     postalCode: "",
     phone: userData?.phone || "",
-    email: userData?.email || "",
+    email: "carlos@gmail.com",
   });
 
   // Handle redirects
@@ -188,8 +188,7 @@ const CheckoutPage = () => {
                   id="fullName"
                   type="text"
                   name="fullName"
-                  value={formData.fullName}
-                  readOnly
+                  value={"Carlos"}
                   className={`${styles.inputField} ${styles.readOnlyField}`}
                   aria-label="Nombre completo (no editable)"
                 />
@@ -259,8 +258,7 @@ const CheckoutPage = () => {
                   id="email"
                   type="email"
                   name="email"
-                  value={formData.email}
-                  readOnly
+                  value={"carlos@gmail.com"}
                   className={`${styles.inputField} ${styles.readOnlyField}`}
                   aria-label="Correo electrónico (no editable)"
                 />

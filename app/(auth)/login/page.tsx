@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
 import {
   FaEye,
@@ -11,29 +11,61 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
-import { useAuthStore } from "@/app/store";
+import { useAuthStore } from "@/app/store/authStore";
 import { useRouter } from "next/navigation";
-import { User } from "@/app/store";
 
-const page = () => {
+const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState<Omit<User, "id" | "name">>({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState<null | string>(null);
 
-  const { isLoading, error, login } = useAuthStore();
+  const { login, isLoading, isAuthenticated } = useAuthStore();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated, router]);
+
+  const validateForm = () => {
+    if (!formData.email) {
+      setError("Por favor ingresa tu correo electrónico");
+      return false;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Por favor ingresa un correo electrónico válido");
+      return false;
+    }
+
+    if (!formData.password) {
+      setError("Por favor ingresa tu contraseña");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    if (!validateForm()) return;
+
     try {
-      const result = await login(formData);
-      if (result) {
+      const success = await login(formData.email, formData.password);
+      if (success) {
         router.push("/");
+        router.refresh();
       }
     } catch (err) {
-      console.log(err);
+      console.error("Login error:", err);
+      setError(err instanceof Error ? err.message : "Error al iniciar sesión");
     }
   };
 
@@ -67,7 +99,7 @@ const page = () => {
           </p>
         </div>
 
-        {/* login Form */}
+        {/* Login Form */}
         <div className={styles.loginForm}>
           <form onSubmit={handleSubmit} className={styles.formGroup}>
             <div className={styles.formGroup}>
@@ -75,13 +107,13 @@ const page = () => {
               <div className={styles.inputContainer}>
                 <FaEnvelope className={styles.inputIcon} />
                 <input
-                  type="text"
+                  type="email"
                   name="email"
-                  autoComplete="off"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="demo@gmail.com"
+                  placeholder="ejemplo@correo.com"
                 />
               </div>
             </div>
@@ -93,24 +125,20 @@ const page = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  autoComplete="off"
+                  autoComplete="current-password"
                   value={formData.password}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="demo123"
+                  placeholder="••••••••"
                 />
                 <div
                   onClick={() => setShowPassword(!showPassword)}
                   className={styles.passIconContainer}
                 >
                   {showPassword ? (
-                    <FaEye
-                      className={`${styles.inputIcon} ${styles.eyeIcon}`}
-                    />
+                    <FaEyeSlash className={styles.eyeIcon} />
                   ) : (
-                    <FaEyeSlash
-                      className={`${styles.inputIcon} ${styles.eyeIcon}`}
-                    />
+                    <FaEye className={styles.eyeIcon} />
                   )}
                 </div>
               </div>
@@ -118,22 +146,27 @@ const page = () => {
 
             {error && <div className={styles.errorMessage}>{error}</div>}
 
-            <div className={styles.demoMessage}>
-              <strong>Demo:</strong> demo@gmail.com / demo123
+            <div className={styles.forgotPassword}>
+              <Link
+                href="/forgot-password"
+                className={styles.forgotPasswordLink}
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
             </div>
-            <div className={styles.demoMessage}>
-              <strong>Admin:</strong> admin@gmail.com / admin123
-            </div>
+
             <button
               type="submit"
+              className={`${styles.loginButton} ${
+                isLoading ? styles.loading : ""
+              }`}
               disabled={isLoading}
-              className={styles.submitButton}
             >
               {isLoading ? (
                 <FaSpinner className={styles.spinner} />
               ) : (
                 <>
-                  Iniciar Sesión
+                  Iniciar sesión
                   <FaArrowRight className={styles.arrowIcon} />
                 </>
               )}
@@ -141,20 +174,17 @@ const page = () => {
           </form>
 
           <div className={styles.goToRegister}>
-            <p className={styles.goToRegisterText}>¿No tienes cuenta?</p>
-            <Link href={"/register"} className={styles.goToRegisterLink}>
-              Crear cuenta nueva
-            </Link>
-          </div>
-
-          <div className={styles.backToHome}>
-            <Link href={"/"} className={styles.backToHomeLink}>
-              ← Volver al inicio
-            </Link>
+            <span className={styles.goToRegisterText}>
+              ¿No tienes una cuenta?{" "}
+              <Link href="/register" className={styles.goToRegisterLink}>
+                Regístrate
+              </Link>
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default page;
+
+export default LoginPage;

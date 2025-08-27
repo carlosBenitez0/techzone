@@ -1,245 +1,343 @@
-"use client";
+// app/store/authStore.ts
 import { create } from "zustand";
 
-export interface User {
-  id?: number;
-  name?: string;
+interface UserData {
+  id: string;
+  userName: string;
   email: string;
-  password: string;
-  address?: string;
-  phone?: string;
-  roll?: string; // user, admin
+  normalizedEmail: string;
+  emailConfirmed: boolean;
+  phoneNumber: string;
+  phoneNumberConfirmed: boolean;
+  twoFactorEnabled: boolean;
+  lockoutEnd: string | null;
+  lockoutEnabled: boolean;
+  accessFailedCount: number;
+  roleId: string;
+  roleName: string;
+  createdAt: string;
+  updatedAt: string | null;
+  lastAccessAt: string;
 }
 
-interface authUser {
-  email: string;
-  password: string;
-}
-
-interface AuthStore {
-  userData: User;
-  registeredUsers: User[];
+interface AuthState {
+  accessToken: string | null;
+  refreshToken: string | null;
+  tokenType: string | null;
+  expiresIn: number | null;
+  tokenExpiry: number | null;
+  user: UserData | null;
+  login: (email: string, password: string) => Promise<boolean>;
+  refreshAccessToken: () => Promise<string>;
+  getValidToken: () => Promise<string>;
+  logout: () => void;
+  handleSuccessfulLogin: (responseData: any) => boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  setIsLoading: (isLoading: boolean) => void;
-  setError: (error: string | null) => void;
-  login: (user: User) => Promise<boolean | undefined>;
-  register: (user: Omit<User, "id">) => Promise<boolean | undefined>;
-  updateProfile: (user: User) => void;
-  logout: () => void;
-  checkAdmin: (user: authUser) => boolean;
 }
 
-export const useAuthStore = create<AuthStore>((set, get) => ({
-  userData: {
-    id: 0,
-    name: "demo",
-    email: "demo@gmail.com",
-    password: "demo123",
-    address: "",
-    phone: "",
-    roll: "user",
-  },
-  registeredUsers: [
-    {
-      id: 0,
-      name: "demo",
-      email: "demo@gmail.com",
-      password: "demo123",
-      roll: "user",
-    },
-    {
-      id: 1,
-      name: "admin",
-      email: "admin@gmail.com",
-      password: "admin123",
-      roll: "admin",
-    },
-  ],
-  isAuthenticated: true,
+const API_URL = "http://207.58.175.220:9568";
+
+export const useAuthStore = create<AuthState>((set, get) => ({
+  accessToken: null,
+  refreshToken: null,
+  tokenType: null,
+  expiresIn: null,
+  tokenExpiry: null,
+  user: null,
+  isAuthenticated: false,
   isLoading: false,
   error: null,
-  //setters
-  setIsLoading: (isLoading: boolean) => set({ isLoading: isLoading }),
-  setError: (error: string | null) => set({ error: error }),
 
-  register: async (user: Omit<User, "id" | "roll">) => {
+  login: async (email: string, password: string) => {
     set({ isLoading: true, error: null });
+
     try {
-      // Simular llamada a API
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      const { registeredUsers } = get();
-
-      //validaciones
-      const userExists = registeredUsers.some((u) => u.email === user.email);
-      if (userExists) {
-        set({ error: "El usuario ya está registrado" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (!user.name || !user.email || !user.password) {
-        set({ error: "Todos los campos son obligatorios" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (user.name.length < 3) {
-        set({ error: "El nombre debe tener al menos 3 caracteres" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (user.password.length < 4) {
-        set({ error: "La contraseña debe tener al menos 4 caracteres" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(user.email)) {
-        set({ error: "El correo electrónico no es válido" });
-        set({ isLoading: false });
-        return false;
-      }
-
-      const newUser = {
-        ...user,
-        id: registeredUsers.length + 1,
-        roll: "user",
-        address: "",
-        phone: "",
+      // Use test credentials for now
+      const loginData = {
+        email: "jose@gmail.com",
+        password: "Aa12345678@",
+        twoFactorCode: "string",
+        twoFactorRecoveryCode: "string",
       };
 
-      set((state) => ({
-        registeredUsers: [...state.registeredUsers, newUser],
-        userData: newUser,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
-      }));
+      console.log("Attempting login...");
 
-      return true;
-    } catch (err) {
-      set({ error: "Error en el registro: " + err });
-    } finally {
-      set({ isLoading: false });
+      // First, authenticate the user to get the initial tokens
+      const authResponse = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      console.log("Login response status:", authResponse.status);
+
+      if (!authResponse.ok) {
+        const errorText = await authResponse.text();
+        console.error(
+          "Login failed with status:",
+          authResponse.status,
+          "Response:",
+          errorText
+        );
+
+        let errorMessage =
+          "Error al iniciar sesión. Verifica tus credenciales.";
+        try {
+          const errorData = JSON.parse(errorText);
+          if (errorData.detail) {
+            errorMessage = errorData.detail;
+          }
+        } catch (e) {
+          console.error("Error parsing error response:", e);
+        }
+
+        throw new Error(errorMessage);
+      }
+
+      const authData = await authResponse.json();
+
+      // Log only non-sensitive auth data
+      console.log(
+        "Auth response received. Token type:",
+        authData.tokenType || "Bearer"
+      );
+
+      if (!authData.accessToken) {
+        console.error("Invalid auth response:", authData);
+        throw new Error("No se recibió un token de acceso válido");
+      }
+
+      // Store tokens in the auth store
+      const expiresIn = authData.expiresIn || 1800;
+      set({
+        accessToken: authData.accessToken,
+        refreshToken: authData.refreshToken,
+        tokenType: authData.tokenType || "Bearer",
+        expiresIn: expiresIn,
+        tokenExpiry: Date.now() + expiresIn * 1000,
+        isAuthenticated: true,
+      });
+
+      // Now get the user data using the new token
+      const userResponse = await fetch(
+        `${API_URL}/api/v1/user/get-by-email?email=${encodeURIComponent(
+          email
+        )}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authData.accessToken}`,
+          },
+        }
+      );
+
+      if (!userResponse.ok) {
+        const errorMessage =
+          userResponse.status === 404
+            ? "Usuario no encontrado"
+            : "Error al obtener los datos del usuario. Por favor, inténtalo de nuevo.";
+
+        set({
+          error: errorMessage,
+          isLoading: false,
+          isAuthenticated: false,
+          user: null,
+        });
+        return false;
+      }
+
+      const userData = await userResponse.json();
+
+      // Create a safe copy of user data for logging (remove sensitive fields if any)
+      const safeUserData = { ...userData };
+      // Remove any sensitive fields you don't want to log
+      delete safeUserData.password;
+      delete safeUserData.twoFactorCode;
+      delete safeUserData.recoveryCode;
+
+      console.log("User data response:", JSON.stringify(safeUserData, null, 2));
+
+      // Combine auth and user data
+      const responseData = {
+        ...userData,
+        auth: {
+          accessToken: authData.accessToken,
+          refreshToken: authData.refreshToken,
+          tokenType: authData.tokenType || "Bearer",
+          expiresIn: authData.expiresIn || 1800,
+        },
+      };
+
+      return get().handleSuccessfulLogin(responseData);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Error al iniciar sesión";
+      set({
+        error: errorMessage,
+        isLoading: false,
+        isAuthenticated: false,
+        user: null,
+      });
+      return false;
     }
   },
 
-  checkAdmin: (user: User) => {
-    const adminAccounts: User[] = [
-      {
-        email: "admin@gmail.com",
-        password: "admin123",
-        roll: "admin",
-        address: "",
-        phone: "",
-      },
-      {
-        email: "superuser@gmail.com",
-        password: "superuser123",
-        roll: "admin",
-        address: "",
-        phone: "",
-      },
-    ];
-    return adminAccounts.some(
-      (admin) =>
-        admin.email === user.email &&
-        admin.password === user.password &&
-        admin.roll === "admin"
-    );
-  },
+  handleSuccessfulLogin: (responseData: any) => {
+    if (!responseData.isSuccess) {
+      throw new Error("Usuario no existe o las credenciales son incorrectas");
+    }
 
-  // Inicio de sesión
-  //Omitimos el id y el nombre en el tipado
-  login: async (user: authUser) => {
-    set({ isLoading: true, error: null });
-    try {
-      // Simular llamada a API
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+    const userData: UserData = responseData.data;
+    const authData = responseData.auth;
 
-      const { registeredUsers } = get();
+    // Set user role based on email
+    const updatedUserData = {
+      ...userData,
+      roleName: userData.email === "jose@gmail.com" ? "Admin" : "User",
+    };
 
-      //validaciones
-      if (!user.email || !user.password) {
-        set({ error: "Todos los campos son obligatorios" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(user.email)) {
-        set({ error: "El correo electrónico no es válido" });
-        set({ isLoading: false });
-        return false;
-      }
-      if (user.password.length < 4) {
-        set({ error: "La contraseña debe tener al menos 4 caracteres" });
-        set({ isLoading: false });
-        return false;
+    if (authData) {
+      const expiresIn = authData.expiresIn || 1800;
+      const expiryTime = Date.now() + expiresIn * 1000;
+
+      // Save to localStorage for persistence
+      if (typeof window !== "undefined") {
+        localStorage.setItem("authToken", authData.accessToken);
+        localStorage.setItem("refreshToken", authData.refreshToken || "");
+        localStorage.setItem("user", JSON.stringify(updatedUserData));
+        localStorage.setItem("tokenExpiry", expiryTime.toString());
       }
 
-      const userFound = registeredUsers.find(
-        (u) => u.email === user.email && u.password === user.password
-      );
-
-      if (!userFound) {
-        set({ error: "Credenciales incorrectas" });
-        set({ isLoading: false });
-        return false;
-      }
-
-      const isAdminCheck = get().checkAdmin(userFound);
-
+      // Update the auth state
       set({
-        userData: {
-          id: userFound.id,
-          name: userFound.name,
-          email: userFound.email,
-          password: userFound.password,
-          roll: isAdminCheck ? "admin" : "user",
-          address: userFound.address,
-          phone: userFound.phone,
-        },
+        user: updatedUserData,
+        accessToken: authData.accessToken,
+        refreshToken: authData.refreshToken,
+        tokenType: authData.tokenType || "Bearer",
+        expiresIn: expiresIn,
+        tokenExpiry: expiryTime,
         isAuthenticated: true,
         isLoading: false,
         error: null,
       });
+
       return true;
-    } catch (error) {
-      set({ error: "Error en el login" });
-      console.log(error);
-    } finally {
-      set({ isLoading: false });
     }
-  },
 
-  updateProfile: (user: Omit<User, "id" | "roll" | "password">) => {
-    const { userData } = get();
+    // If no auth data, still update the user state but don't mark as authenticated
     set({
-      userData: {
-        ...userData,
-        name: user.name,
-        email: user.email,
-        address: user.address,
-        phone: user.phone,
-      },
-    });
-  },
-
-  // Cierre de sesión
-  logout: () => {
-    set({
-      userData: {
-        id: 0,
-        name: "",
-        email: "",
-        password: "",
-        roll: "",
-        address: "",
-        phone: "",
-      },
+      user: updatedUserData,
       isAuthenticated: false,
       isLoading: false,
       error: null,
     });
-    return true;
+    return false;
+  },
+
+  refreshAccessToken: async () => {
+    const { refreshToken } = get();
+    if (!refreshToken) {
+      console.error("No refresh token available for refresh");
+      // Redirect to login if no refresh token is available
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      }
+      throw new Error("No refresh token available");
+    }
+
+    try {
+      console.log("Attempting to refresh token...");
+      const response = await fetch(`${API_URL}/refresh`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${refreshToken}`,
+        },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          "Refresh token failed with status:",
+          response.status,
+          "Response:",
+          errorText
+        );
+        throw new Error("Failed to refresh token");
+      }
+
+      const data = await response.json();
+      console.log("Token refresh response:", data);
+
+      if (!data.accessToken) {
+        console.error("No access token in refresh response:", data);
+        throw new Error("Invalid token response format");
+      }
+
+      const expiresIn = data.expiresIn || 1800;
+      const newState: Partial<AuthState> = {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken || refreshToken,
+        tokenType: data.tokenType || "Bearer",
+        expiresIn: expiresIn,
+        tokenExpiry: Date.now() + expiresIn * 1000,
+        isAuthenticated: true,
+      };
+
+      console.log("Token refreshed successfully");
+      set(newState);
+      return data.accessToken;
+    } catch (error) {
+      console.error("Refresh token error:", error);
+      get().logout();
+      throw new Error("Session expired. Please log in again.");
+    }
+  },
+
+  getValidToken: async () => {
+    const { accessToken, tokenExpiry, refreshAccessToken } = get();
+
+    // If we have a token that's still valid for more than 5 minutes, return it
+    if (accessToken && tokenExpiry && tokenExpiry - Date.now() > 300000) {
+      return accessToken;
+    }
+
+    // Otherwise try to refresh the token
+    try {
+      console.log("Getting new valid token...");
+      const newToken = await refreshAccessToken();
+      console.log("Successfully obtained new token");
+      return newToken;
+    } catch (error) {
+      console.error("Failed to refresh token:", error);
+      // Only redirect if we're not already on the login page
+      if (
+        typeof window !== "undefined" &&
+        !window.location.pathname.includes("/login")
+      ) {
+        window.location.href = "/login";
+      }
+      throw new Error("Session expired. Please log in again.");
+    }
+  },
+
+  logout: () => {
+    set({
+      accessToken: null,
+      refreshToken: null,
+      tokenType: null,
+      expiresIn: null,
+      tokenExpiry: null,
+      user: null,
+      isAuthenticated: false,
+      error: null,
+    });
   },
 }));

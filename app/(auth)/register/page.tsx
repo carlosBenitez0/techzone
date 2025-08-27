@@ -1,5 +1,6 @@
+// app/(auth)/register/page.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import {
   FaEye,
@@ -10,32 +11,87 @@ import {
   FaSpinner,
   FaUser,
 } from "react-icons/fa";
-
 import Link from "next/link";
 import { LogoTechZoneNoText } from "@/app/components/shared";
-import { useAuthStore } from "@/app/store/authStore";
+import { useUserStore } from "@/app/store/userStore";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const router = useRouter();
-  const { isLoading, register, error } = useAuthStore();
+  const { register, loading } = useUserStore();
 
+  const [error, setError] = useState<null | string>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
+
+  const validateForm = () => {
+    if (!formData.name) {
+      setError("Por favor ingresa tu nombre completo");
+      return false;
+    }
+
+    if (!formData.email) {
+      setError("Por favor ingresa tu correo electrónico");
+      return false;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Por favor ingresa un correo electrónico válido");
+      return false;
+    }
+
+    if (!formData.password) {
+      setError("Por favor ingresa una contraseña");
+      return false;
+    }
+
+    if (formData.password.length < 8) {
+      setError("La contraseña debe tener al menos 8 caracteres");
+      return false;
+    }
+
+    if (!/(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/.test(formData.password)) {
+      setError(
+        "La contraseña debe incluir al menos una mayúscula, un número y un carácter especial"
+      );
+      return false;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Las contraseñas no coinciden");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    if (!validateForm()) return;
+
     try {
-      const result = await register(formData);
-      if (result) {
-        router.push("/login");
+      const success = await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: "00000000",
+        confirmPassword: formData.confirmPassword,
+      });
+
+      if (success) {
+        setRegistrationSuccess(true);
       }
     } catch (err) {
-      console.log(err);
+      console.error("Error en el registro:", err);
+      setError(err instanceof Error ? err.message : "Error en el registro");
     }
   };
 
@@ -45,6 +101,13 @@ const page = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Redirect to login after successful registration
+  useEffect(() => {
+    if (registrationSuccess) {
+      router.push("/login");
+    }
+  }, [registrationSuccess, router]);
 
   return (
     <div className={styles.registerContainer}>
@@ -59,21 +122,23 @@ const page = () => {
         {/* Header */}
         <div className={styles.registerHeader}>
           <div className={styles.logoContainer}>
-            <LogoTechZoneNoText w={50} h={50} clickable={false} />
+            <div className={styles.logoIcon}>
+              <LogoTechZoneNoText w={50} h={50} clickable={false} />
+            </div>
           </div>
           <h1 className={`${styles.registerTitle} ${styles.fontOrbitron}`}>
-            Registrate
+            Regístrate
           </h1>
           <p className={styles.registerSubtitle}>
             Da el primer paso en tu viaje por Techzone.
           </p>
         </div>
 
-        {/* register Form */}
+        {/* Register Form */}
         <div className={styles.registerForm}>
           <form onSubmit={handleSubmit} className={styles.formGroup}>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Usuario</label>
+              <label className={styles.formLabel}>Nombre Completo</label>
               <div className={styles.inputContainer}>
                 <FaUser className={styles.inputIcon} />
                 <input
@@ -83,7 +148,8 @@ const page = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="usuario123"
+                  placeholder="Carlos Benitez"
+                  // required attribute removed for custom validation
                 />
               </div>
             </div>
@@ -93,13 +159,14 @@ const page = () => {
               <div className={styles.inputContainer}>
                 <FaEnvelope className={styles.inputIcon} />
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   autoComplete="off"
                   value={formData.email}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="demo@gmail.com"
+                  placeholder="ejemplo@correo.com"
+                  // required attribute removed for custom validation
                 />
               </div>
             </div>
@@ -111,24 +178,49 @@ const page = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  autoComplete="off"
                   value={formData.password}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="demo123"
+                  placeholder="••••••••"
+                  // required attribute removed for custom validation
                 />
                 <div
                   onClick={() => setShowPassword(!showPassword)}
                   className={styles.passIconContainer}
                 >
                   {showPassword ? (
-                    <FaEye
-                      className={`${styles.inputIcon} ${styles.eyeIcon}`}
-                    />
+                    <FaEyeSlash className={styles.eyeIcon} />
                   ) : (
-                    <FaEyeSlash
-                      className={`${styles.inputIcon} ${styles.eyeIcon}`}
-                    />
+                    <FaEye className={styles.eyeIcon} />
+                  )}
+                </div>
+              </div>
+              <p className={styles.passwordHint}>
+                Mínimo 8 caracteres, 1 mayúscula, 1 número y 1 carácter especial
+              </p>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Confirmar Contraseña</label>
+              <div className={styles.inputContainer}>
+                <FaLock className={styles.inputIcon} />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  className={styles.formInput}
+                  placeholder="••••••••"
+                  // required attribute removed for custom validation
+                />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={styles.passIconContainer}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className={styles.eyeIcon} />
+                  ) : (
+                    <FaEye className={styles.eyeIcon} />
                   )}
                 </div>
               </div>
@@ -138,37 +230,31 @@ const page = () => {
 
             <button
               type="submit"
-              className={styles.submitButton}
-              disabled={isLoading}
+              disabled={loading}
+              className={`${styles.submitButton} ${
+                loading ? styles.loading : ""
+              }`}
             >
-              {isLoading ? (
-                <FaSpinner
-                  className={`${styles.spinner} ${styles.spinnerRotate}`}
-                />
-              ) : (
+              {loading ? (
                 <>
-                  Registrarse
-                  <FaArrowRight className={styles.arrowIcon} />
+                  <FaSpinner className={styles.spinner} /> Registrando...
                 </>
+              ) : (
+                "Registrarse"
               )}
             </button>
+
+            <div className={styles.goToRegister}>
+              <p className={styles.goToRegisterText}>¿Ya tienes una cuenta?</p>
+              <Link href="/login" className={styles.goToRegisterLink}>
+                Iniciar sesión
+              </Link>
+            </div>
           </form>
-
-          <div className={styles.goToRegister}>
-            <p className={styles.goToRegisterText}>¿Ya tienes una cuenta?</p>
-            <Link href={"/login"} className={styles.goToRegisterLink}>
-              Iniciar sesión
-            </Link>
-          </div>
-
-          <div className={styles.backToHome}>
-            <Link href={"/"} className={styles.backToHomeLink}>
-              ← Volver al inicio
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 };
-export default page;
+
+export default RegisterPage;
